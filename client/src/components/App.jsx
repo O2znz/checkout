@@ -7,7 +7,8 @@ class App extends Component {
     super(props);
     this.state = {
       listingInfo: [],
-      id: 66
+      id: 66,
+      reservedDates: [],
     };
     this.initialize = this.initialize.bind(this);
     this.getCurrentCalendar = this.getCurrentCalendar.bind(this)
@@ -25,25 +26,27 @@ class App extends Component {
   }
 
   getCurrentCalendar() {
-    //var today = new Date();
-    console.log("get current calender was invoked")
-    // axios.get(`/currentCalendar?ID=66`)
+    console.log(this.state.id)
     axios.get(`/currentCalendar?ID=${this.state.id}`)
       .then((response) => {
         console.log(response.data)
+        this.setState({reservedDates: response.data})
+      })
+      .catch((err) => {
+        console.log("there was an err getting the current calendar: ", err)
       });
   }
 
   componentDidMount() {
-    //this.initialize()
-    this.getCurrentCalendar();
+    this.initialize()
   }
 
 
   render() {
     return (
-      <div>
+      <div onClick={this.getCurrentCalendar}>
         Hello World
+        {this.state.reservedDates[3]}
       </div>
     );
   }

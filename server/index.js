@@ -156,16 +156,13 @@ app.get('/listing', (req, res) => {
 })
 
 app.get('/currentCalendar', (req, res) => {
-  console.log('Request orig url:', req.originalUrl);
-  var url = req.originalUrl
-  var id = url.substring(url.length - 2, url.length);
-  
+  var id = req.query.ID
   var today = new Date();
   var todayMoment = moment(today);
   var year = todayMoment.format('YY');
   var month = todayMoment.format('MM');
 
-  //(id, month, year, callback)
+
   getFns.getCurrentCalendar(id, month, year, (err, data) => {
     if (err) {
       res.status(500).send(err)
@@ -177,10 +174,10 @@ app.get('/currentCalendar', (req, res) => {
 
 });
 
-// app.post('/reservation', (req, res) =>{
-//     var req = req.body;
-
-// })
+app.post('/nextCalendar', (req, res) =>{
+    var req = req.body;
+    res.send("hello world")
+})
 
 
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
