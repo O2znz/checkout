@@ -167,16 +167,17 @@ app.get('/currentCalendar', (req, res) => {
     if (err) {
       res.status(500).send(err)
     } else {
-      console.log("get current calendar succeeded")
       res.status(200).send(data)
     }
   })
 
 });
 
-app.post('/nextCalendar', (req, res) =>{
-    var req = req.body;
-    res.send("hello world")
+app.get('/month', (req, res) =>{
+  var today = new Date();
+  var todayMoment = moment(today);
+  var month = todayMoment.format('MM');
+  res.send({month})
 })
 
 

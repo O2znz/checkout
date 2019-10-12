@@ -9,6 +9,7 @@ class App extends Component {
       listingInfo: [],
       id: 66,
       reservedDates: [],
+      month: ''
     };
     this.initialize = this.initialize.bind(this);
     this.getCurrentCalendar = this.getCurrentCalendar.bind(this)
@@ -35,6 +36,12 @@ class App extends Component {
       .catch((err) => {
         console.log("there was an err getting the current calendar: ", err)
       });
+
+      axios.get('/month')
+        .then((response) => {
+          console.log("this is the current month:" , response.data)
+          this.setState({month: response.data})
+        })
   }
 
   componentDidMount() {
