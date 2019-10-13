@@ -11,13 +11,14 @@ var yearTracker;
 var currentMonth;
 var currentDay;
 var currentDate;
+var currentYear = 19;
 var daysPastThisMonth;
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyparser.json());
 
 app.get('/listing', (req, res) => {
-    var listingId = faker.random.number({min: 3, max:5})
+    var listingId = faker.random.number({min: 0, max:99})
     getFns.getInitialData(listingId, (err, data) => {
         if (err) {
           res.status(404).send(err)
@@ -78,13 +79,25 @@ app.get('/nextCalendar', (req, res) => {
   } else {
     monthTracker++;
   }
-  getFns.getCalendar(id, monthTracker, yearTracker, (err, data) => {
-    if (err) {
-      res.status(500).send(err)
-    } else {
-      res.status(200).send(data)
-    }
-  });
+
+  if (monthTracker === currentMonth && currentYear === yearTracker) {
+    getFns.getCalendar(id, monthTracker, yearTracker, (err, data) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        data.reservedDates = data.reservedDates.concat(daysPastThisMonth)
+        res.status(200).send(data)
+      }
+    });
+  } else {
+    getFns.getCalendar(id, monthTracker, yearTracker, (err, data) => {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        res.status(200).send(data)
+      }
+    });
+  }
 })
 
 app.get('/previousCalendar', (req, res) => {
@@ -97,7 +110,7 @@ app.get('/previousCalendar', (req, res) => {
     monthTracker--;
   }
   console.log(monthTracker, currentMonth)
-  if (monthTracker === currentMonth) {
+  if (monthTracker === currentMonth && currentYear === yearTracker) {
     getFns.getCalendar(id, monthTracker, yearTracker, (err, data) => {
       if (err) {
         res.status(500).send(err)
@@ -106,7 +119,8 @@ app.get('/previousCalendar', (req, res) => {
         res.status(200).send(data)
       }
     });
-
+  } else if (monthTracker < currentMonth && yearTracker === currentYear || yearTracker < currentYear) {
+    res.send("these days arent available because they already passed")
   } else {
     getFns.getCalendar(id, monthTracker, yearTracker, (err, data) => {
       if (err) {

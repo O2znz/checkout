@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 
 class App extends Component {
@@ -7,7 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       listingInfo: [],
-      id: 66,
+      id: '',
       reservedDates: [],
       month: ''
     };
@@ -16,6 +17,8 @@ class App extends Component {
     this.getNextCalendar = this.getNextCalendar.bind(this);
     this.getPreviousCalendar = this.getPreviousCalendar.bind(this);
   }
+
+  
 
   initialize() {
     axios.get('/listing')
@@ -40,7 +43,6 @@ class App extends Component {
 
       axios.get('/month')
         .then((response) => {
-          //console.log("this is the current month:" , response.data)
           this.setState({month: response.data})
         })
   }
@@ -57,7 +59,6 @@ class App extends Component {
   }
 
   getPreviousCalendar() {
-    console.log('hit here')
     axios.get(`/previousCalendar?ID=${this.state.id}`)
       .then((response) => {
         console.log(response.data)
