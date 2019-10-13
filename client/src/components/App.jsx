@@ -12,7 +12,9 @@ class App extends Component {
       month: ''
     };
     this.initialize = this.initialize.bind(this);
-    this.getCurrentCalendar = this.getCurrentCalendar.bind(this)
+    this.getCurrentCalendar = this.getCurrentCalendar.bind(this);
+    this.getNextCalendar = this.getNextCalendar.bind(this);
+    this.getPreviousCalendar = this.getPreviousCalendar.bind(this);
   }
 
   initialize() {
@@ -27,7 +29,6 @@ class App extends Component {
   }
 
   getCurrentCalendar() {
-    console.log(this.state.id)
     axios.get(`/currentCalendar?ID=${this.state.id}`)
       .then((response) => {
         console.log(response.data)
@@ -39,9 +40,32 @@ class App extends Component {
 
       axios.get('/month')
         .then((response) => {
-          console.log("this is the current month:" , response.data)
+          //console.log("this is the current month:" , response.data)
           this.setState({month: response.data})
         })
+  }
+
+  getNextCalendar() {
+    axios.get(`/nextCalendar?ID=${this.state.id}`)
+      .then((response) => {
+        console.log(response.data)
+        this.setState({reservedDates: response.data})
+      })
+      .catch((err) => {
+        console.log("there was an err getting the next calendar: ", err)
+      });
+  }
+
+  getPreviousCalendar() {
+    console.log('hit here')
+    axios.get(`/previousCalendar?ID=${this.state.id}`)
+      .then((response) => {
+        console.log(response.data)
+        this.setState({reservedDates: response.data})
+      })
+      .catch((err) => {
+        console.log("there was an err getting the previous calendar: ", err)
+      });
   }
 
   componentDidMount() {
@@ -51,9 +75,16 @@ class App extends Component {
 
   render() {
     return (
-      <div onClick={this.getCurrentCalendar}>
-        Hello World
-        {this.state.reservedDates[3]}
+      <div>
+          <div onClick={this.getCurrentCalendar}>
+            Current Calendar
+           </div>
+            <div onClick={this.getNextCalendar}>
+            Next Calendar
+            </div>
+            <div onClick={this.getPreviousCalendar}>
+              Previous Calendar
+            </div>
       </div>
     );
   }
@@ -62,13 +93,3 @@ class App extends Component {
 
 export default App;
 
-
-// /something/:id
-// --> /something/8989
-
-// req.params
-
-// /something
-// --> /something?id=789
-
-// req.query xxxx
