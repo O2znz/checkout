@@ -8,6 +8,7 @@ var Reservation = mongoose.Schema;
 var reservationSchema = new Reservation({
   listingId: Number,
   Rating: Number,
+  ReviewCount: Number,
   Price:   Number,
   GuestsMax: Number,
   CleaningFee: Number,
