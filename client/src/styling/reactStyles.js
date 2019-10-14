@@ -12,10 +12,16 @@ const Button = styled.button`
 `;
 
 const Box = styled.div`
-  border-width: 1px;
-  border-style: solid;
-  border-color: grey;
+  border: 1px solid grey;
+  width: 300px;
+  height: 300px;
+`
+const NightlyRate = styled.span`
+  font-size: 20px;
+  font-color: #39423b;
 `
 
-export {Button, Box}
+
+
+export {Button, Box, NightlyRate}
 
