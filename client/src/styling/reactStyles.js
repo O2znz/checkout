@@ -28,7 +28,19 @@ const PerNight = styled.span`
   color: #312B2B;
 `
 
+const RatingStyle = styled.span`
+  font-size: 12px;
+  color: #312B2B;
+  font-weight: bold;
+  padding-left: 10px;
+`
+
+const ReviewStyle = styled.span`
+  font-size: 12px;
+  color: #979696;
+`
 
 
-export {Button, Box, NightlyRate, PerNight}
+
+export {Button, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
 
