@@ -15,13 +15,20 @@ const Box = styled.div`
   border: 1px solid grey;
   width: 300px;
   height: 300px;
+  padding: 10px;
 `
 const NightlyRate = styled.span`
   font-size: 20px;
-  font-color: #39423b;
+  color: #312B2B;
+  padding-left: 10px;
+`
+
+const PerNight = styled.span`
+  font-size: 12px;
+  color: #312B2B;
 `
 
 
 
-export {Button, Box, NightlyRate}
+export {Button, Box, NightlyRate, PerNight}
 
