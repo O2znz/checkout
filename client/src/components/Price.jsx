@@ -5,7 +5,7 @@ import {NightlyRate, PerNight, GeneralText} from '../styling/reactStyles.js'
 
 var Price = (props) => {
     return (
-        <div>
+        <div className='price'>
            <PerNight><NightlyRate>${props.price}</NightlyRate> per price</PerNight>
         </div>
     )
