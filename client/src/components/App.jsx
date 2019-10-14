@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import {Button, Box} from '../styling/reactStyles.js'
+
+
 
 
 class App extends Component {
@@ -86,6 +89,8 @@ class App extends Component {
             <div onClick={this.getPreviousCalendar}>
               Previous Calendar
             </div>
+            <Button> Click me! </Button>
+            <Box> This is my box! </Box>
       </div>
     );
   }
