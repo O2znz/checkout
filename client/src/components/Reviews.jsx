@@ -5,9 +5,9 @@ import Star from 'react-star-rating-component';
 var Reviews = (props) => {
     return (
     <div>
-        <RatingStyle><Star starCount={1}/>
+        <RatingStyle className='rating'><Star starCount={1}/>
         {props.rating}</RatingStyle>
-        <ReviewStyle>({props.reviewsCount} reviews)</ReviewStyle> 
+        <ReviewStyle className='reviews'>({props.reviewsCount} reviews)</ReviewStyle> 
     </div>
     )
 }
