@@ -1,15 +1,5 @@
 import styled from 'styled-components'
 
-const Button = styled.button`
-  display: inline-block;
-  color: palevioletred;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  display: block;
-`;
 
 const Box = styled.div`
   border: 1px solid grey;
@@ -40,7 +30,12 @@ const ReviewStyle = styled.span`
   color: #979696;
 `
 
+const Line = styled.div`
+  color:#BAB9B9;
+  border-top: 1px solid
+`
 
 
-export {Button, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
+
+export {Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
 

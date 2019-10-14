@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import {Button, Box} from '../styling/reactStyles.js';
+import {Box, Line} from '../styling/reactStyles.js';
 import Price from './Price.jsx';
 import Reviews from './Reviews.jsx'
 
@@ -90,10 +90,10 @@ class App extends Component {
             <div onClick={this.getPreviousCalendar}>
               Previous Calendar
             </div>
-            <Button> Click me! </Button>
             <Box> 
               <Price price={this.state.listingInfo.Price}/> 
               <Reviews rating={this.state.listingInfo.Rating} reviewsCount={this.state.listingInfo.ReviewCount}/>
+              <Line/>
             </Box>
       </div>
     );
