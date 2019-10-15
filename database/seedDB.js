@@ -9,6 +9,7 @@ var seedDatabase = require('./index.js').seedDatabase;
 // id for 0-99 listing id, agreed upon by group
 var id = -1;
 
+
 //increments the id for each listing
 var listId = function() {
   id++;
@@ -36,11 +37,12 @@ var generateDummyData = function() {
     data = [];
     n = 0;
 
-//TODO FIX ID 
+//TODO FIX ID faker.finance.amount(9000,10000,4)
   var listing =  function () {
     var reservation = {
       listingId: listId(),
-      Rating: faker.random.number({min: 3, max:5}),
+      Rating: faker.finance.amount(3,5,2),
+      ReviewCount: faker.random.number({min:1, max: 500}),
       Price: faker.random.number({min:25, max:250}),
       GuestsMax: faker.random.number({min:1, max:15}),
       CleaningFee: faker.random.number({min:10, max:100}),

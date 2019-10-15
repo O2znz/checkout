@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {ReserveButton, Box, Line, GeneralText, DatesBox} from '../styling/reactStyles.js';
+import Price from './Price.jsx';
+import Reviews from './Reviews.jsx';
+import CheckinCheckout from './CheckinCheckout.jsx';
+
 
 
 class App extends Component {
@@ -7,11 +12,17 @@ class App extends Component {
     super(props);
     this.state = {
       listingInfo: [],
-      id: 66
+      id: '',
+      reservedDates: [],
+      month: ''
     };
     this.initialize = this.initialize.bind(this);
-    this.getCurrentCalendar = this.getCurrentCalendar.bind(this)
+    this.getCurrentCalendar = this.getCurrentCalendar.bind(this);
+    this.getNextCalendar = this.getNextCalendar.bind(this);
+    this.getPreviousCalendar = this.getPreviousCalendar.bind(this);
   }
+
+  
 
   initialize() {
     axios.get('/listing')
@@ -25,25 +36,70 @@ class App extends Component {
   }
 
   getCurrentCalendar() {
-    //var today = new Date();
-    console.log("get current calender was invoked")
-    // axios.get(`/currentCalendar?ID=66`)
     axios.get(`/currentCalendar?ID=${this.state.id}`)
       .then((response) => {
         console.log(response.data)
+        this.setState({reservedDates: response.data})
+      })
+      .catch((err) => {
+        console.log("there was an err getting the current calendar: ", err)
+      });
+
+      axios.get('/month')
+        .then((response) => {
+          this.setState({month: response.data})
+        })
+  }
+
+  getNextCalendar() {
+    axios.get(`/nextCalendar?ID=${this.state.id}`)
+      .then((response) => {
+        console.log(response.data)
+        this.setState({reservedDates: response.data})
+      })
+      .catch((err) => {
+        console.log("there was an err getting the next calendar: ", err)
+      });
+  }
+
+  getPreviousCalendar() {
+    axios.get(`/previousCalendar?ID=${this.state.id}`)
+      .then((response) => {
+        console.log(response.data)
+        this.setState({reservedDates: response.data})
+      })
+      .catch((err) => {
+        console.log("there was an err getting the previous calendar: ", err)
       });
   }
 
   componentDidMount() {
-    //this.initialize()
-    this.getCurrentCalendar();
+    this.initialize()
   }
 
 
   render() {
     return (
       <div>
-        Hello World
+          <div onClick={this.getCurrentCalendar}>
+            Current Calendar
+           </div>
+            <div onClick={this.getNextCalendar}>
+            Next Calendar
+            </div>
+            <div onClick={this.getPreviousCalendar}>
+              Previous Calendar
+            </div>
+            <Box> 
+              <Price price={this.state.listingInfo.Price}/> 
+              <Reviews rating={this.state.listingInfo.Rating} reviewsCount={this.state.listingInfo.ReviewCount}/>
+              <Line/>
+              <GeneralText>Dates</GeneralText> 
+              <DatesBox><CheckinCheckout/></DatesBox>
+              <GeneralText>Guests</GeneralText> 
+              <DatesBox> 1 guest </DatesBox>
+              <ReserveButton>Reserve</ReserveButton>
+            </Box>
       </div>
     );
   }
@@ -52,13 +108,3 @@ class App extends Component {
 
 export default App;
 
-
-// /something/:id
-// --> /something/8989
-
-// req.params
-
-// /something
-// --> /something?id=789
-
-// req.query xxxx
