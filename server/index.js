@@ -50,11 +50,15 @@ app.get('/currentCalendar', (req, res) => {
   }
 
   daysPastThisMonth = daysAlreadyPast;
+
+  console.log("this is the id: ", id, "  this is the month: ", month, "this is the year: ", year)
   
   getFns.getCalendar(id, month, year, (err, data) => {
     if (err) {
+      console.log("getCalendar fn in index.js failed")
       res.status(500).send(err)
     } else {
+      console.log("getCalendar fn in index.js worked")
       data.reservedDates = data.reservedDates.concat(daysAlreadyPast)
       res.status(200).send(data)
     }

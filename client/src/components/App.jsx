@@ -42,7 +42,7 @@ class App extends Component {
               <Reviews rating={this.state.listingInfo.Rating} reviewsCount={this.state.listingInfo.ReviewCount}/>
               <Line/>
               <GeneralText>Dates</GeneralText> 
-              <DatesBox><CheckinCheckout/></DatesBox>
+              <DatesBox><CheckinCheckout id={this.state.id}/></DatesBox>
               <GeneralText>Guests</GeneralText> 
               <DatesBox> 1 guest </DatesBox>
               <ReserveButton>Reserve</ReserveButton>

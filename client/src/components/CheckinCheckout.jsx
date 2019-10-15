@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from './Calendar.jsx'
 import styled from 'styled-components'
+import axios from 'axios';
 
 const Text = styled.span`
     padding: 10px;
@@ -17,7 +18,8 @@ class CheckinCheckout extends Component {
       showCheckoutCalendar: false,
       month: '',
       currentMonth: '',
-      reservedDates: []
+      reservedDates: [],
+      initialClick: true
     }
     this.showCheckinCalendar = this.showCheckinCalendar.bind(this);
     this.showCheckoutCalendar = this.showCheckoutCalendar.bind(this);
@@ -27,7 +29,7 @@ class CheckinCheckout extends Component {
   }
 
   getCurrentCalendar() {
-    axios.get(`/currentCalendar?ID=${this.state.id}`)
+    axios.get(`/currentCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({reservedDates: response.data})
@@ -69,6 +71,12 @@ class CheckinCheckout extends Component {
 
   showCheckoutCalendar(event) {
     event.preventDefault();
+
+    if (this.state.initialClick) {
+      this.getCurrentCalendar()
+      this.setState({initialClick: false});
+    }
+
     if (!this.state.showCheckoutCalendar) {
         this.setState({
             showCheckoutCalendar: true,
@@ -85,8 +93,9 @@ class CheckinCheckout extends Component {
   showCheckinCalendar(event) {
     event.preventDefault();
 
-    if (!this.state.reservedDates) {
+    if (this.state.initialClick) {
       this.getCurrentCalendar()
+      this.setState({initialClick: false});
     }
 
     if (!this.state.showCheckinCalendar) {
@@ -104,6 +113,8 @@ class CheckinCheckout extends Component {
 
 
   render() {
+    console.log("these are your dates after clicking: ", this.state.reservedDates)
+
     return (
         <div>
           <span>
@@ -115,7 +126,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckoutCalendar
             ? (
               <div>
-                <Calendar month={10}/>
+                <Calendar currentMonth={this.state.currentMonth} month={3}/>
               </div>
             )
             : (
@@ -126,7 +137,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckinCalendar 
             ? (
               <div>
-                <Calendar/>
+                <Calendar currentMonth={this.state.currentMonth} month={2}/>
               </div>
             )
             : (
