@@ -75,5 +75,9 @@ const ReserveButton = styled.button`
 `
 
 
+ 
+
+
+
 export {NextButton, ReserveButton, DatesBox, GeneralText, Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
 

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
 import {ReserveButton, Box, Line, GeneralText, DatesBox} from '../styling/reactStyles.js';
 import Price from './Price.jsx';
 import Reviews from './Reviews.jsx';
-import Calendar from './Calendar.jsx';
-
+import Checkin from './CheckIn.jsx';
+import CheckinCheckout from './Checkout.jsx';
 
 
 
@@ -97,7 +96,7 @@ class App extends Component {
               <Reviews rating={this.state.listingInfo.Rating} reviewsCount={this.state.listingInfo.ReviewCount}/>
               <Line/>
               <GeneralText>Dates</GeneralText> 
-              <DatesBox> Check-in -> Check-out </DatesBox>
+              <DatesBox><CheckinCheckout/></DatesBox>
               <GeneralText>Guests</GeneralText> 
               <DatesBox> 1 guest </DatesBox>
               <ReserveButton>Reserve</ReserveButton>

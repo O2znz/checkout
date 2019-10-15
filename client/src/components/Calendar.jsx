@@ -18,6 +18,7 @@ class Calendar extends Component {
             <div>
                 <NextButton> previous </NextButton>
                 <NextButton> next </NextButton>
+                <div>so much text jasdhjdashjdashjka</div>
             </div>
         )
     }
