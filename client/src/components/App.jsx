@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {ReserveButton, Box, Line, GeneralText, DatesBox} from '../styling/reactStyles.js';
 import Price from './Price.jsx';
 import Reviews from './Reviews.jsx';
+import Calendar from './Calendar.jsx';
 
 
 

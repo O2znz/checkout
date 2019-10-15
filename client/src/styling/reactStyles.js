@@ -7,6 +7,19 @@ const Box = styled.div`
   height: 500px;
   padding: 10px;
 `
+
+const NextButton = styled.button`
+  border: 1px solid #A8A6A6;
+  border-radius: 4px;
+  color: #A8A6A6
+`
+
+const CalendarBox = styled.table`
+  border: 2px solid gray;
+  width: 300px;
+  height: 400px;
+  padding: 10px;
+`
 const NightlyRate = styled.span`
   font-size: 20px;
   color: #312B2B;
@@ -62,5 +75,5 @@ const ReserveButton = styled.button`
 `
 
 
-export {ReserveButton, DatesBox, GeneralText, Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
+export {NextButton, ReserveButton, DatesBox, GeneralText, Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
 
