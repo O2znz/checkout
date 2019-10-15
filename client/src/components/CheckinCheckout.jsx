@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import Calendar from './Calendar.jsx'
+import styled from 'styled-components'
+
+const Text = styled.span`
+    padding: 10px;
+    margin: 40px 0px 40px 10px;
+    font-size: 20px;
+`
+
 
 class CheckinCheckout extends Component {
   constructor() {
@@ -46,18 +54,17 @@ class CheckinCheckout extends Component {
 
   render() {
     return (
-      <span>
-        <span onClick={this.showCheckinCalendar}> 
-            Checkin  -->
-        </span>
-        <span onClick={this.showCheckoutCalendar}>
-          Checkout
-        </span>
-        {
+        <div>
+          <span>
+            <Text onClick={this.showCheckinCalendar}>Checkin</Text>
+            <Text> --> </Text>
+            <Text onClick={this.showCheckoutCalendar}>Checkout</Text>
+          </span>
+          {
           this.state.showCheckoutCalendar
             ? (
               <div>
-                <div> Checkout Calendar Will Go Here </div>
+                <Calendar/>
               </div>
             )
             : (
@@ -68,14 +75,25 @@ class CheckinCheckout extends Component {
           this.state.showCheckinCalendar 
             ? (
               <div>
-                <div> Checkin Calendar Will Go Here </div>
+                <Calendar/>
               </div>
             )
             : (
               null
             )
         }
-      </span>
+        </div>
+        
+
+    //   <span>
+    //     <span onClick={this.showCheckinCalendar}> 
+    //         Checkin  --> 
+    //     </span>
+    //     <span onClick={this.showCheckoutCalendar}>
+    //       Checkout
+    //     </span>
+        
+    //   </span>
     );
   }
 }

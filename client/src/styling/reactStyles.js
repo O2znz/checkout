@@ -11,7 +11,8 @@ const Box = styled.div`
 const NextButton = styled.button`
   border: 1px solid #A8A6A6;
   border-radius: 4px;
-  color: #A8A6A6
+  color: #A8A6A6,
+  margin: 20px;
 `
 
 const CalendarBox = styled.table`
@@ -19,6 +20,8 @@ const CalendarBox = styled.table`
   width: 300px;
   height: 400px;
   padding: 10px;
+  z-index: 2;
+  position: relative;
 `
 const NightlyRate = styled.span`
   font-size: 20px;
@@ -72,6 +75,13 @@ const ReserveButton = styled.button`
   padding: 20px;
   margin: 10px;
   font-size: 16px
+  z-index: 1;
+  position: relative;
+`
+const TableUnit = styled.div`
+  // margin: 10px;
+  // padding: 10px;
+  color: blue;
 `
 
 
@@ -79,5 +89,5 @@ const ReserveButton = styled.button`
 
 
 
-export {NextButton, ReserveButton, DatesBox, GeneralText, Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
+export {CalendarBox, TableUnit, NextButton, ReserveButton, DatesBox, GeneralText, Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
 

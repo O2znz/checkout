@@ -3,8 +3,7 @@ import axios from 'axios';
 import {ReserveButton, Box, Line, GeneralText, DatesBox} from '../styling/reactStyles.js';
 import Price from './Price.jsx';
 import Reviews from './Reviews.jsx';
-import Checkin from './CheckIn.jsx';
-import CheckinCheckout from './Checkout.jsx';
+import CheckinCheckout from './CheckinCheckout.jsx';
 
 
 

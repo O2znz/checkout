@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {NextButton} from '../styling/reactStyles.js'
+import {NextButton, CalendarBox} from '../styling/reactStyles.js';
+
 
 /*
 This will have two buttons, some text, and then the selected calendar
@@ -15,11 +16,11 @@ class Calendar extends Component {
 
     render() {
         return (
-            <div>
+            <CalendarBox>
                 <NextButton> previous </NextButton>
                 <NextButton> next </NextButton>
                 <div>so much text jasdhjdashjdashjka</div>
-            </div>
+            </CalendarBox>
         )
     }
 }
