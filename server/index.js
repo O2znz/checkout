@@ -50,16 +50,29 @@ app.get('/currentCalendar', (req, res) => {
   }
 
   daysPastThisMonth = daysAlreadyPast;
-  
   getFns.getCalendar(id, month, year, (err, data) => {
     if (err) {
+      console.log("getCalendar fn in index.js failed")
       res.status(500).send(err)
     } else {
+      console.log("getCalendar fn in index.js worked")
       data.reservedDates = data.reservedDates.concat(daysAlreadyPast)
       res.status(200).send(data)
     }
   })
 });
+
+
+
+app.get('/monthAndYear', (req, res) => {
+  var month = req.query.ID
+  console.log("this is month on the server side", month)
+  var year = '20' + strYear 
+  console.log(currentMonth, "this is the current month!!")
+  var months = ['x', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var month = months[currentMonth];
+  res.send({year, month})
+})
 
 app.get('/month', (req, res) =>{
   var today = new Date();
@@ -72,6 +85,7 @@ app.get('/month', (req, res) =>{
 
 app.get('/nextCalendar', (req, res) => {
   var id = Number(req.query.ID)
+  console.log("this is the id in the next calendar server", id)
   if (monthTracker === 12) {
     monthTracker = 1;
     yearTracker++
