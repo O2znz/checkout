@@ -15,6 +15,20 @@ const NextButton = styled.button`
   margin: 20px;
 `
 
+const NextOrPreviousMonth = styled.span`
+  border: 1px solid gray;
+  width: 10px;
+  height: 7px;
+  padding: 10px;
+  z-index: 3;
+  position: relative;
+  background-color: #FAFAFA;
+`
+const TopRow = styled.div`
+  display: flex;
+  justify-content: spread-between;
+`
+
 const CalendarBox = styled.div`
   border: 2px solid gray;
   width: 300px;
@@ -86,5 +100,5 @@ const ReserveButton = styled.button`
 
 
 
-export {CalendarBox, NextButton, ReserveButton, DatesBox, GeneralText, Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
+export {TopRow, NextOrPreviousMonth, CalendarBox, NextButton, ReserveButton, DatesBox, GeneralText, Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
 

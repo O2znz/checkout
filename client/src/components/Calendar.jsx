@@ -1,39 +1,45 @@
 import React, { Component } from 'react';
-import {NextButton, CalendarBox} from '../styling/reactStyles.js';
+import {NextOrPreviousMonth, CalendarBox} from '../styling/reactStyles.js';
+import FlexContainer from 'react-styled-flexbox';
 
+// const NextOrPreviousMonth = styled.span`
+
+// `
 
 class Calendar extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            month: props.month,
-            reservedDates: []
-        }
-
-        this.handleMouseOver = this.handleMouseOver.bind(this);
+        this.state = {}
     }
     
-    handleMouseOver(event) {
-        this.setState((state, props) => ({
-            month: props.month,
-            reservedDates: props.reservedDates,
-          }));
-    }
-   
 
     render() {
+        var previousArrow = '<';
+        var nextArrow = '>';
+        console.log("this is monthstr on the calendar side", this.props.monthStr)
         return (
-            <CalendarBox onMouseMove={this.handleMouseOver}>
-                <div>{this.props.month}</div>
-                {/* <NextButton> previous </NextButton>
-                <span>{props.month} {props.year}</span>
-                <NextButton> next </NextButton>
-                <div>{props.dates.map((day) => {
+            <CalendarBox>
+                <FlexContainer justifySpaceBetween={true}>
+                   <NextOrPreviousMonth>{previousArrow}</NextOrPreviousMonth>
+                   <div>{this.props.monthStr} {this.props.year}</div>
+                   <NextOrPreviousMonth>{nextArrow}</NextOrPreviousMonth>
+                </FlexContainer>
+                <div>{this.props.currentMonth}</div>
+                {this.props.reservedDates.map((day) => {
                     return <span>{day}</span>
-                })}</div> */}
+                })}
+                <div>{this.props.month}</div>
+            
             </CalendarBox>
         )
     }
 }
+
+/* <NextButton> previous </NextButton>
+<span>{props.month} {props.year}</span>
+<NextButton> next </NextButton>
+<div>{props.dates.map((day) => {
+    return <span>{day}</span>
+})}</div> */
 
 export default Calendar

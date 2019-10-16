@@ -12,9 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       listingInfo: [],
-      id: '',
-      reservedDates: [],
-      month: ''
+      id: ''
     };
     this.initialize = this.initialize.bind(this);
   }

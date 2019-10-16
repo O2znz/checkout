@@ -50,9 +50,6 @@ app.get('/currentCalendar', (req, res) => {
   }
 
   daysPastThisMonth = daysAlreadyPast;
-
-  console.log("this is the id: ", id, "  this is the month: ", month, "this is the year: ", year)
-  
   getFns.getCalendar(id, month, year, (err, data) => {
     if (err) {
       console.log("getCalendar fn in index.js failed")
@@ -64,6 +61,18 @@ app.get('/currentCalendar', (req, res) => {
     }
   })
 });
+
+
+
+app.get('/monthAndYear', (req, res) => {
+  console.log("hitting here")
+  var strYear = currentYear.toString();
+  var year = '20' + strYear 
+  console.log(currentMonth, "this is the current month!!")
+  var months = ['x', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var month = months[currentMonth];
+  res.send({year, month})
+})
 
 app.get('/month', (req, res) =>{
   var today = new Date();

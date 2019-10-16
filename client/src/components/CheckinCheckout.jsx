@@ -3,6 +3,8 @@ import Calendar from './Calendar.jsx'
 import styled from 'styled-components'
 import axios from 'axios';
 
+
+
 const Text = styled.span`
     padding: 10px;
     margin: 40px 0px 40px 10px;
@@ -19,7 +21,9 @@ class CheckinCheckout extends Component {
       month: '',
       currentMonth: '',
       reservedDates: [],
-      initialClick: true
+      initialClick: true,
+      monthStr: '',
+      yearStr: '2019'
     }
     this.showCheckinCalendar = this.showCheckinCalendar.bind(this);
     this.showCheckoutCalendar = this.showCheckoutCalendar.bind(this);
@@ -32,7 +36,7 @@ class CheckinCheckout extends Component {
     axios.get(`/currentCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
-        this.setState({reservedDates: response.data})
+        this.setState({reservedDates: response.data.reservedDates})
       })
       .catch((err) => {
         console.log("there was an err getting the current calendar: ", err)
@@ -40,11 +44,26 @@ class CheckinCheckout extends Component {
 
       axios.get('/month')
         .then((response) => {
+          var month = Number(response.data.month)
+          var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          var monthStr = months[month-1]
           this.setState({
-            month: response.data,
-            currentMonth: response.data
+            month: response.data.month,
+            currentMonth: response.data.month,
+            monthStr: monthStr
           })
+        .catch((err) => {
+          console.log("there was an error getting the month")
         })
+      })
+
+      // axios.get('/monthAndYear')
+      //   .then((response) => {
+      //     console.log("this is the response data from MonthandYear Get Req", response.data)
+      //   })
+      //   .catch((err) => {
+      //     console.log("your month and year call failed dawg", err)
+      //   })
   }
 
   getNextCalendar() {
@@ -72,11 +91,6 @@ class CheckinCheckout extends Component {
   showCheckoutCalendar(event) {
     event.preventDefault();
 
-    if (this.state.initialClick) {
-      this.getCurrentCalendar()
-      this.setState({initialClick: false});
-    }
-
     if (!this.state.showCheckoutCalendar) {
         this.setState({
             showCheckoutCalendar: true,
@@ -93,11 +107,6 @@ class CheckinCheckout extends Component {
   showCheckinCalendar(event) {
     event.preventDefault();
 
-    if (this.state.initialClick) {
-      this.getCurrentCalendar()
-      this.setState({initialClick: false});
-    }
-
     if (!this.state.showCheckinCalendar) {
         this.setState({
             showCheckinCalendar: true,
@@ -111,9 +120,16 @@ class CheckinCheckout extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.getCurrentCalendar()
+    }
+  }
+
 
   render() {
-    console.log("these are your dates after clicking: ", this.state.reservedDates)
+    console.log("this is your monthstr", this.state.monthStr)
+
 
     return (
         <div>
@@ -126,7 +142,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckoutCalendar
             ? (
               <div>
-                <Calendar currentMonth={this.state.currentMonth} month={3}/>
+                <Calendar monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={99}/>
               </div>
             )
             : (
@@ -137,7 +153,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckinCalendar 
             ? (
               <div>
-                <Calendar currentMonth={this.state.currentMonth} month={2}/>
+                <Calendar monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={132}/>
               </div>
             )
             : (
