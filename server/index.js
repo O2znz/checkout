@@ -14,10 +14,10 @@ var currentDate;
 var currentYear = 19;
 var daysPastThisMonth;
 
-var date = moment("October 1 2019");
-var daysinMont = date.daysInMonth()
-var dow = date.day();
-console.log(daysinMont);
+// var date = moment("October 1 2019");
+// var daysinMont = date.daysInMonth()
+// var dow = date.day();
+// console.log(daysinMont);
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyparser.json());

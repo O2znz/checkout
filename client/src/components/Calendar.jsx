@@ -2,22 +2,19 @@ import React, { Component } from 'react';
 import {NextOrPreviousMonth, CalendarBox} from '../styling/reactStyles.js';
 import FlexContainer from 'react-styled-flexbox';
 import {CalendarContainer} from '../styling/CalendarStyles.js';
-
-// const NextOrPreviousMonth = styled.span`
-
-// `
+import Day from './Day.jsx';
+import Box from '@material-ui/core/Box'
 
 class Calendar extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
-    
-    
 
     render() {
         var previousArrow = '<';
         var nextArrow = '>';
+        var dummyArr = [1, 2, 3, 4, 5, 1, 1, 1, 1, 1, 1,1 ,1, 1, 1,1, 2, 3, 4, 5, 1, 1, 1, 1, 1, 1 ,1 ,1,1,1 ,1,1, 1, 1,1]
 
         return (
             <CalendarBox>
@@ -28,9 +25,15 @@ class Calendar extends Component {
                 </FlexContainer>
                 <div>{this.props.currentMonth}</div>
                 <div>{this.props.month}</div>
-                <FlexContainer justifySpaceAround={true}>
-                  <CalendarContainer>test</CalendarContainer>
-                </FlexContainer>
+                <Box display="flex" justifyContent="center">
+                    <CalendarContainer> 
+                        <Box display="flex" justifyContent="center" flexWrap="wrap"> 
+                        {dummyArr.map((day)=> {
+                        return <Day/>
+                        })}
+                        </Box>
+                    </CalendarContainer>
+                </Box>
             </CalendarBox>
         )
     }

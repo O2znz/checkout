@@ -8,6 +8,14 @@ const CalendarContainer = styled.div`
     position: relative;
 `
 
+const DayContainer = styled.span`
+    width: 51px;
+    height: 58px;
+    border: 1px solid gray;
+    z-index: 4,
+    position: relative;
+`
 
 
-export {CalendarContainer}
+
+export {CalendarContainer, DayContainer}
