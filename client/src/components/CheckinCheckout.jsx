@@ -38,6 +38,20 @@ class CheckinCheckout extends Component {
         November: 'December',
         December: 'January'
       },
+      monthBack: {
+        January: 'December',
+        February: 'January',
+        March: 'February',
+        April: 'March',
+        May: 'April',
+        June: 'May',
+        July: 'June',
+        August: 'July',
+        September: 'August',
+        October: 'September',
+        November: 'October',
+        December: 'November'
+      },
       nextMonthReservedDates: [],
       previousMonthReservedDates: 'All the days are passed.'
     }
@@ -127,6 +141,18 @@ class CheckinCheckout extends Component {
       .catch((err) => {
         console.log("there was an err getting the previous calendar: ", err)
       });
+
+      var mStr = this.state.monthStr
+      var monStr = this.state.monthBack[mStr]
+
+      if (this.state.monthStr !== 'January') {
+        this.setState({monthStr: monStr})
+      } else if (this.state.monthStr === 'January' && this.state.yearStr === '2020') {
+        this.setState({
+          yearStr: '2019',
+          monthStr: monStr
+          })
+      }
   }
 
   showCheckoutCalendar(event) {
