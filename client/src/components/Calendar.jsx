@@ -12,22 +12,20 @@ class Calendar extends Component {
         this.state = {}
     }
     
+    
 
     render() {
         var previousArrow = '<';
         var nextArrow = '>';
-        console.log("this is monthstr on the calendar side", this.props.monthStr)
+
         return (
             <CalendarBox>
                 <FlexContainer justifySpaceBetween={true}>
-                   <NextOrPreviousMonth>{previousArrow}</NextOrPreviousMonth>
+                   <NextOrPreviousMonth onClick={this.props.getPreviousCalendar}>{previousArrow}</NextOrPreviousMonth>
                    <div>{this.props.monthStr} {this.props.year}</div>
-                   <NextOrPreviousMonth>{nextArrow}</NextOrPreviousMonth>
+                   <NextOrPreviousMonth onClick={this.props.getNextCalendar}>{nextArrow}</NextOrPreviousMonth>
                 </FlexContainer>
                 <div>{this.props.currentMonth}</div>
-                {this.props.reservedDates.map((day) => {
-                    return <span>{day}</span>
-                })}
                 <div>{this.props.month}</div>
             
             </CalendarBox>
@@ -35,11 +33,5 @@ class Calendar extends Component {
     }
 }
 
-/* <NextButton> previous </NextButton>
-<span>{props.month} {props.year}</span>
-<NextButton> next </NextButton>
-<div>{props.dates.map((day) => {
-    return <span>{day}</span>
-})}</div> */
 
 export default Calendar

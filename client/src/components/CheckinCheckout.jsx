@@ -23,7 +23,23 @@ class CheckinCheckout extends Component {
       reservedDates: [],
       initialClick: true,
       monthStr: '',
-      yearStr: '2019'
+      yearStr: '2019',
+      months: {
+        January: 'February',
+        February: 'March',
+        March: 'April',
+        April: 'May',
+        May: 'June',
+        June: 'July',
+        July: 'August',
+        August: 'September',
+        September: 'October',
+        October: 'November',
+        November: 'December',
+        December: 'January'
+      },
+      nextMonthReservedDates: [],
+      previousMonthReservedDates: 'All the days are passed.'
     }
     this.showCheckinCalendar = this.showCheckinCalendar.bind(this);
     this.showCheckoutCalendar = this.showCheckoutCalendar.bind(this);
@@ -57,31 +73,56 @@ class CheckinCheckout extends Component {
         })
       })
 
-      // axios.get('/monthAndYear')
-      //   .then((response) => {
-      //     console.log("this is the response data from MonthandYear Get Req", response.data)
-      //   })
-      //   .catch((err) => {
-      //     console.log("your month and year call failed dawg", err)
-      //   })
-  }
-
-  getNextCalendar() {
-    axios.get(`/nextCalendar?ID=${this.state.id}`)
+      axios.get(`/nextCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
-        this.setState({reservedDates: response.data})
+        this.setState({nextMonthReservedDates: response.data.reservedDates})
       })
       .catch((err) => {
         console.log("there was an err getting the next calendar: ", err)
       });
   }
 
-  getPreviousCalendar() {
-    axios.get(`/previousCalendar?ID=${this.state.id}`)
+  getNextCalendar() {
+    // set the displayed calendar's reserved dates to the previously rendered next month's dates
+    var currentReservedDates = this.state.nextMonthReservedDates
+    var previousReserved = this.state.reservedDates
+    this.setState({
+      reservedDates: currentReservedDates,
+      previousMonthReservedDates: previousReserved
+    })
+    // then fetch the next month's reserved dates and change state accordingly
+    axios.get(`/nextCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
-        this.setState({reservedDates: response.data})
+        this.setState({nextMonthReservedDates: response.data.reservedDates})
+      })
+      .catch((err) => {
+        console.log("there was an err getting the next calendar: ", err)
+      });
+      //change the monthStr state and the year
+
+      var mStr = this.state.monthStr
+      var monStr = this.state.months[mStr]
+
+      if (this.state.monthStr !== 'December') {
+        this.setState({monthStr: monStr})
+      } else if (this.state.monthStr === 'December' && this.state.yearStr === '2019') {
+        this.setState({
+          yearStr: '2020',
+          monthStr: monStr
+          })
+      }
+  }
+
+  getPreviousCalendar() {
+    var currentReservedDates = this.state.previousMonthReservedDates
+    this.setState({reservedDates: currentReservedDates})
+
+    axios.get(`/previousCalendar?ID=${this.props.id}`)
+      .then((response) => {
+        console.log(response.data)
+        this.setState({previousMonthReservedDates: response.data.reservedDates})
       })
       .catch((err) => {
         console.log("there was an err getting the previous calendar: ", err)
@@ -128,9 +169,6 @@ class CheckinCheckout extends Component {
 
 
   render() {
-    console.log("this is your monthstr", this.state.monthStr)
-
-
     return (
         <div>
           <span>
@@ -142,7 +180,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckoutCalendar
             ? (
               <div>
-                <Calendar monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={99}/>
+                <Calendar getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={99}/>
               </div>
             )
             : (
@@ -153,7 +191,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckinCalendar 
             ? (
               <div>
-                <Calendar monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={132}/>
+                <Calendar getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={132}/>
               </div>
             )
             : (

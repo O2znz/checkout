@@ -65,8 +65,8 @@ app.get('/currentCalendar', (req, res) => {
 
 
 app.get('/monthAndYear', (req, res) => {
-  console.log("hitting here")
-  var strYear = currentYear.toString();
+  var month = req.query.ID
+  console.log("this is month on the server side", month)
   var year = '20' + strYear 
   console.log(currentMonth, "this is the current month!!")
   var months = ['x', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -85,6 +85,7 @@ app.get('/month', (req, res) =>{
 
 app.get('/nextCalendar', (req, res) => {
   var id = Number(req.query.ID)
+  console.log("this is the id in the next calendar server", id)
   if (monthTracker === 12) {
     monthTracker = 1;
     yearTracker++
