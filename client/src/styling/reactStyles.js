@@ -31,8 +31,8 @@ const TopRow = styled.div`
 
 const CalendarBox = styled.div`
   border: 2px solid gray;
-  width: 300px;
-  height: 400px;
+  width: 400px;
+  height: 500px;
   padding: 10px;
   z-index: 2;
   position: relative;

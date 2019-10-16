@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {NextOrPreviousMonth, CalendarBox} from '../styling/reactStyles.js';
 import FlexContainer from 'react-styled-flexbox';
+import {CalendarContainer} from '../styling/CalendarStyles.js';
 
 // const NextOrPreviousMonth = styled.span`
 
@@ -27,7 +28,9 @@ class Calendar extends Component {
                 </FlexContainer>
                 <div>{this.props.currentMonth}</div>
                 <div>{this.props.month}</div>
-            
+                <FlexContainer justifySpaceAround={true}>
+                  <CalendarContainer>test</CalendarContainer>
+                </FlexContainer>
             </CalendarBox>
         )
     }
