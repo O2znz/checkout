@@ -262,7 +262,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckoutCalendar
             ? (
               <div>
-                <Calendar firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={99}/>
+                <Calendar daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth}/>
               </div>
             )
             : (
@@ -273,7 +273,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckinCalendar 
             ? (
               <div>
-                <Calendar getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={132}/>
+                <Calendar daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={132}/>
               </div>
             )
             : (

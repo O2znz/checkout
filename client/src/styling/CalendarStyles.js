@@ -10,7 +10,7 @@ const CalendarContainer = styled.div`
 
 const DayContainer = styled.span`
     width: 51px;
-    height: 58px;
+    height: 48px;
     border: 1px solid gray;
     z-index: 4,
     position: relative;

@@ -18,7 +18,7 @@ class Day extends Component {
 
     render() {
         return (
-            <DayContainer> 1 </DayContainer>
+        <DayContainer> {this.props.day} </DayContainer>
         )
     }
 }
