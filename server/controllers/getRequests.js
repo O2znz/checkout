@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Booking = require('../../database/index.js').Booking
 var moment = require('moment');
 mongoose.connect('mongodb://localhost/reservations', {useNewUrlParser: true});
-var prevMonths = [1,2,3,4,5,6,7,8,9,0,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+
 
 var getInitialData = function(id, callback) {
   Booking.findOne({listingId: id}).then((data) => {
@@ -36,7 +36,6 @@ var getCalendar = function(id, month, year, callback) {
   Booking.findOne({listingId: id}).then((data) => {
     var dates = data.Dates;
     var reservedDates = currentCal(month, year, dates)
-    // console.log(reservedDates, reservedDates.length)
     var reserved = {reservedDates}
     callback(null, reserved);
   })
@@ -48,6 +47,6 @@ var getCalendar = function(id, month, year, callback) {
 
 
 
-module.exports = {getInitialData, getCalendar, prevMonths}
+module.exports = {getInitialData, getCalendar}
 
 
