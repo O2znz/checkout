@@ -14,13 +14,10 @@ var currentDate;
 var currentYear = 19;
 var daysPastThisMonth;
 
-// var date = moment("October 1 2019");
-// var daysinMont = date.daysInMonth()
-// var dow = date.day();
-// console.log(daysinMont);
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyparser.json());
+
 
 app.get('/listing', (req, res) => {
     var listingId = faker.random.number({min: 0, max:99})
@@ -79,11 +76,30 @@ app.get('/monthAndYear', (req, res) => {
   res.send({year, month})
 })
 
+
+// var date = moment("12 1 2018");
+// var daysinMont = date.daysInMonth()
+// var dow = date.day();
+// console.log(dow);
+
 app.get('/month', (req, res) =>{
   var today = new Date();
   var todayMoment = moment(today);
   var month = todayMoment.format('MM');
-  res.send({month})
+  var date = `${month} 1 2019`
+
+
+
+  var dateM = moment(date)
+  var dow = dateM.day()
+
+  var nextMonth = Number(month) + 1
+  var nextMonthStr = nextMonth.toString();
+  var nextMonthDate = `${nextMonthStr} 1 2019`;
+  var nMoment = moment(nextMonthDate)
+  var nextDow = nMoment.day();
+
+  res.send({month, dow, nextDow})
 })
 
 
@@ -128,7 +144,6 @@ app.get('/previousCalendar', (req, res) => {
   } else {
     monthTracker--;
   }
-  console.log(monthTracker, currentMonth)
   if (monthTracker === currentMonth && currentYear === yearTracker) {
     getFns.getCalendar(id, monthTracker, yearTracker, (err, data) => {
       if (err) {
@@ -149,6 +164,22 @@ app.get('/previousCalendar', (req, res) => {
       }
     });
   }
+})
+
+app.get('/firstDay2019', (req, res) => {
+  var month = Number(req.query.ID);
+  var date = `${month} 1 2019`
+  var dow = date.day()
+  res.send(dow)
+
+  // var date = moment("October 1 2019");
+// var daysinMont = date.daysInMonth()
+// var dow = date.day();
+// console.log(daysinMont);
+/*
+I need the number of days in a month, and the day of the week of the first day in the month 
+
+*/
 })
 
 

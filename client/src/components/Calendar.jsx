@@ -28,8 +28,8 @@ class Calendar extends Component {
                 <Box display="flex" justifyContent="center">
                     <CalendarContainer> 
                         <Box display="flex" justifyContent="center" flexWrap="wrap"> 
-                        {dummyArr.map((day)=> {
-                        return <Day/>
+                        {dummyArr.map((day, index) => {
+                        return <Day key={index}/>
                         })}
                         </Box>
                     </CalendarContainer>

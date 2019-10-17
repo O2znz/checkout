@@ -5,6 +5,7 @@ import axios from 'axios';
 
 
 
+
 const Text = styled.span`
     padding: 10px;
     margin: 40px 0px 40px 10px;
@@ -52,8 +53,25 @@ class CheckinCheckout extends Component {
         November: 'October',
         December: 'November'
       },
+      daysInMonth: {
+        January: 31,
+        February: 29,
+        March: 31,
+        April: 30,
+        May: 31,
+        June: 30,
+        July: 31,
+        August: 31,
+        September: 30,
+        October: 31,
+        November: 30,
+        December: 31
+      },
       nextMonthReservedDates: [],
-      previousMonthReservedDates: 'All the days are passed.'
+      previousMonthReservedDates: 'All the days are passed.',
+      firstDayOfMonth: "",
+      previousFirstDay: "",
+      nextFirstDay: "",
     }
     this.showCheckinCalendar = this.showCheckinCalendar.bind(this);
     this.showCheckoutCalendar = this.showCheckoutCalendar.bind(this);
@@ -80,7 +98,9 @@ class CheckinCheckout extends Component {
           this.setState({
             month: response.data.month,
             currentMonth: response.data.month,
-            monthStr: monthStr
+            monthStr: monthStr,
+            firstDayOfMonth: response.data.dow,
+            nextFirstDay: response.data.nextDow 
           })
         .catch((err) => {
           console.log("there was an error getting the month")
@@ -115,6 +135,33 @@ class CheckinCheckout extends Component {
         console.log("there was an err getting the next calendar: ", err)
       });
       //change the monthStr state and the year
+
+     //current month like 'december
+     var currentMonth = this.state.monthStr;
+      // number representing the first day of the month like 0 for sunday
+     var firstDayofCurrentMonth = this.state.firstDayOfMonth
+     //number of days in the month
+     var numberOfDaysInMonth = this.state.daysInMonth[currentMonth]
+     console.log("this is the current month", currentMonth)
+     console.log("this is the first day of the current month", firstDayofCurrentMonth)
+     console.log('this is the current numberOfDays in the month', numberOfDaysInMonth)
+     //console.log(" this is the current first day, plus the number of days in the month, modulo 7", firstDayofCurrentMonth + )
+     
+     var newFirstDay = (firstDayofCurrentMonth + numberOfDaysInMonth) % 7
+     console.log('this is the new first day', newFirstDay)
+     
+
+     var nextMonthStr = this.state.months[currentMonth];
+     var numberOfDaysNextMonth = this.state.daysInMonth[nextMonthStr];
+     var nextMonthNewFirstDay = (newFirstDay + numberOfDaysNextMonth) % 7;
+
+
+
+     this.setState({
+       firstDayOfMonth: newFirstDay,
+       nextFirstDay: nextMonthNewFirstDay
+     })
+    
 
       var mStr = this.state.monthStr
       var monStr = this.state.months[mStr]
@@ -206,7 +253,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckoutCalendar
             ? (
               <div>
-                <Calendar getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={99}/>
+                <Calendar firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={99}/>
               </div>
             )
             : (
