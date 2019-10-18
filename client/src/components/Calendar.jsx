@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {NextOrPreviousMonth, CalendarBox} from '../styling/reactStyles.js';
 import FlexContainer from 'react-styled-flexbox';
-import {CalendarContainer} from '../styling/CalendarStyles.js';
+import {CalendarContainer, DaysTopBar} from '../styling/CalendarStyles.js';
 import Day from './Day.jsx';
 import Box from '@material-ui/core/Box'
 
@@ -9,14 +9,16 @@ class Calendar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            datesArr: []
+            datesArr: [],
+            startDay: '',
+            startMonth: ''
         }
         this.generateDatesArr = this.generateDatesArr.bind(this);
         this.createResObj = this.createResObj.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     generateDatesArr(startDay, daysInMonth) {
-        console.log(startDay, daysInMonth, 'these are the arguments being passed thru')
         var results = []
         var n = 0
         var x = 1
@@ -25,7 +27,7 @@ class Calendar extends Component {
             results.push(0)
             n++
         }
-        
+
         while (x <= daysInMonth) {
             results.push(x);
             x++
@@ -46,6 +48,13 @@ class Calendar extends Component {
         return resObj
     }
 
+    handleClick(e, day, month) { 
+        this.setState({
+            startDay: day,
+            startMonth: month
+        })
+    }
+
 
     render() {
         var previousArrow = '<';
@@ -53,11 +62,18 @@ class Calendar extends Component {
         var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
         var resObj = this.createResObj(this.props.reservedDates);
 
-        // console.log('this is reserved dates passed thru props', this.props.reservedDates)
-        // console.log('this is your new res obj', resObj)
-        // //var dummyArr = [1, 2, 3, 4, 5, 1, 1, 1, 1, 1, 1,1 ,1, 1, 1,1, 2, 3, 4, 5, 1, 1, 1, 1, 1, 1 ,1 ,1,1,1 ,1,1, 1, 1,1,1,1,1,1,1,1,1]
-        // console.log(this.state.datesArr, "this is the state of the datesArr")
-        // console.log(this.props.firstDay, this.props.daysInMonth, 'these are the props!')
+        //console.log(this.props.monthStr, this.)
+
+        if (this.state.startDay && this.state.startMonth) {
+            var grayedDates = 1;
+            
+            while (grayedDates < this.state.startDay && this.state.startMonth === this.props.monthStr) {
+                    resObj[grayedDates] = true
+                    grayedDates++;
+            }
+        }
+    
+
         return (
             <CalendarBox>
                 <FlexContainer justifySpaceBetween={true}>
@@ -65,17 +81,22 @@ class Calendar extends Component {
                    <div>{this.props.monthStr} {this.props.year}</div>
                    <NextOrPreviousMonth onClick={this.props.getNextCalendar}>{nextArrow}</NextOrPreviousMonth>
                 </FlexContainer>
+                    <FlexContainer justifySpaceBetween={true}>
+                        <DaysTopBar>Su</DaysTopBar>
+                        <DaysTopBar>Mo</DaysTopBar>
+                        <DaysTopBar>Tu</DaysTopBar>
+                        <DaysTopBar>We</DaysTopBar>
+                        <DaysTopBar>Th</DaysTopBar>
+                        <DaysTopBar>Fr</DaysTopBar>
+                        <DaysTopBar>Sa</DaysTopBar>
+                    </FlexContainer>
                 <div>{this.props.currentMonth}</div>
                 <div>{this.props.month}</div>
                 <Box display="flex" justifyContent="center">
                     <CalendarContainer> 
                         <Box display="flex" justifyContent="center" flexWrap="wrap"> 
                         {datesArr.map((day, index) => {
-                            if (resObj[day]) {
-                                return <Day key={index} day={day} isReserved='true'/>
-                            } else {
-                                return <Day key={index} day={day} isReserved='false'/>
-                            }
+                                return <Day month={this.props.monthStr} key={index} day={day} isReserved='false' reservedDates={resObj} handleClick={this.handleClick}/>
                         })}
                         </Box>
                     </CalendarContainer>

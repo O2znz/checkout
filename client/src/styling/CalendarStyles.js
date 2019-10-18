@@ -14,30 +14,26 @@ const DayContainer = styled.span`
     border: 1px solid gray;
     z-index: 4,
     position: relative;
-    color: blue;
+    color: blue
 `
 
-const DayContainer2 = styled.span`
-    width: 51px;
-    height: 48px;
-    border: 1px solid gray;
-    z-index: 4,
-    position: relative;
+
+const DayContainer2 = styled(DayContainer)`
     color: gray;
 `
 
-const IsReserved = styled.span`
-    color: blue;
-    z-index: 5;
-    position: relative;
-`
-
-const IsFree = styled.span`
+const DaysTopBar = styled.span`
+    font-weight: bold;
     color: gray;
-    z-index: 5;
-    position: relative;
+`
+
+const TopBarContainer = styled.div`
+    width: 375px;
+    height: 20px;
+
 `
 
 
 
-export {CalendarContainer, DayContainer, IsReserved, IsFree, DayContainer2}
+
+export {CalendarContainer, DayContainer, DayContainer2, DaysTopBar}
