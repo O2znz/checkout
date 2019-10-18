@@ -30,18 +30,18 @@ const DayContainer = styled.span`
 
 
 const DayContainer2 = styled(DayContainer)`
-    color: gray;
+    color: rgb(216, 216, 216)
 `
 
 const DaysTopBar = styled.span`
     font-weight: bold;
-    color: gray;
+    color: rgb(117, 117, 117)
 `
 
 const TopBarContainer = styled.div`
     width: 350px;
     height: 20px;
-    margin-left: 28px;
+    margin-left: 26px;
     margin-top: 10px
 
 `

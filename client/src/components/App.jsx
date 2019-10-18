@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {ReserveButton, Box, Line, GeneralText, DatesBox} from '../styling/reactStyles.js';
+import {Box, DatesBox} from '../styling/reactStyles.js';
 import Price from './Price.jsx';
 import Reviews from './Reviews.jsx';
 import CheckinCheckout from './CheckinCheckout.jsx';
-import {DatesAndGuests} from '../styling/AppStyles.js'
+import {DatesAndGuests, ChargeWarning, ReserveButton, Line, Attention, Views} from '../styling/AppStyles.js'
+import FlexContainer from 'react-styled-flexbox'
 
 
 
@@ -35,7 +36,10 @@ class App extends Component {
 
   render() {
     var dates = 'Dates';
-    var guests = 'Guests'
+    var guests = 'Guests';
+    var chargeWarning = 'You wont be charged yet'
+    var attention = 'This place is getting a lot of attention.'
+    var viewsThisWeek = 'It’s been viewed 500+ times in the past week.'
     return (
       <div>
             <Box> 
@@ -48,7 +52,17 @@ class App extends Component {
               </DatesBox>
               <DatesAndGuests>{guests}</DatesAndGuests> 
               <DatesBox> 1 guest </DatesBox>
-              <ReserveButton>Reserve</ReserveButton>
+              <FlexContainer justifyCenter={true}>
+                  <ReserveButton>Reserve</ReserveButton>
+              </FlexContainer>
+              <FlexContainer justifyCenter={true}>
+                <ChargeWarning>{chargeWarning}</ChargeWarning>
+              </FlexContainer>
+              <Line/>
+              <FlexContainer justifyLeft={true} directionColumn={true}>
+                <Attention>{attention}</Attention>
+                <Views>{viewsThisWeek}</Views>
+              </FlexContainer>
             </Box>
       </div>
     );

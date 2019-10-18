@@ -72,20 +72,6 @@ const GeneralText = styled.div`
 
 
 
-const ReserveButton = styled.button`
-  background: red;
-  color: white;
-  text-align: center;
-  border-radius: 4px;
-  width: 380px;
-  padding: 20px;
-  margin: 10px;
-  font-size: 16px
-  z-index: 1;
-  position: relative;
-`
 
-
-
-export {TopRow, NextOrPreviousMonth, CalendarBox, NextButton, ReserveButton, DatesBox, GeneralText, Line, Box}
+export {TopRow, NextOrPreviousMonth, CalendarBox, NextButton, DatesBox, Line, Box}
 

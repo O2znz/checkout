@@ -12,15 +12,19 @@ createGlobalStyle`
 `
 
 const RatingStyle = styled.span`
-  font-size: 14px;
-  color: #312B2B;
-  font-weight: bold;
+  font-size: 12px;
+  color: rgb(72, 72, 72);
+  font-weight: 400;
   padding-left: 10px;
+  font-family: Cabin, sans-serif;
 `
 
 const ReviewStyle = styled.span`
-  font-size: 14px;
-  color: #979696;
+  font-size: 12px;
+  color: #767676;
+  font-family: Cabin, sans-serif;
+  font-weight: 200;
+  margin-left: 2px
 `
 
 

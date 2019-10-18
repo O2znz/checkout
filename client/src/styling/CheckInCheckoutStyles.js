@@ -19,12 +19,14 @@ const Checkin = styled(Text)`
     margin-left: 16px;
     color: rgb(118, 118, 118);
     font-family: Cabin, sans-serif;
+    font-weight: 200;
 `
 
 const Checkout = styled(Text)`
     margin-right: 16px;
     color: rgb(118, 118, 118);
     font-family: Cabin, sans-serif;
+    font-weight: 200;
 `
 
 const Arrow = styled(Text)`
