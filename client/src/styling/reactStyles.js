@@ -39,7 +39,7 @@ const NextOrPreviousMonth = styled.span`
   background-color: #FFF;
   font-weight: 400;
   color: #484848;
-  font-size: 20px;
+  font-size: 22px;
   font-family: Cabin, sans-serif;
 `
 const TopRow = styled.div`
@@ -48,7 +48,7 @@ const TopRow = styled.div`
 `
 
 const CalendarBox = styled.div`
-  border: 2px solid gray;
+  border: 1px solid #EBEBEB;
   width: 400px;
   height: 500px;
   padding: 10px;

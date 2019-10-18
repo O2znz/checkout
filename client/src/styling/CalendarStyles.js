@@ -14,28 +14,48 @@ createGlobalStyle`
 const CalendarContainer = styled.div`
     width: 375px;
     height: 300px;
-    border: 1px solid gray;
+    border: hidden;
     z-index: 3;
     position: relative;
 `
 
 const DayContainer = styled.span`
     width: 51px;
-    height: 48px;
-    border: 1px solid gray;
+    height: 41px;
+    border: hidden;
     z-index: 4,
     position: relative;
-    color: blue
+    color: rgb(0, 132, 137);
+    padding-top: 13px;
+    font-weight: 500;
+    font-family: Cabin, sans-serif;
+    :hover {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        padding: 8px;
+        background: #fff;
+        border: 2px solid rgb(0, 132, 137);
+      }
 `
 
 
-const DayContainer2 = styled(DayContainer)`
-    color: rgb(216, 216, 216)
+const DayContainer2 = styled.span`
+    width: 51px;
+    height: 41px;
+    border: hidden;
+    z-index: 4,
+    position: relative;
+    color: rgb(216, 216, 216);
+    padding-top: 13px;
+    font-weight: 500;
+    font-family: Cabin, sans-serif;
 `
 
 const DaysTopBar = styled.span`
     font-weight: bold;
-    color: rgb(117, 117, 117)
+    color: rgb(117, 117, 117);
+    font-family: Cabin, sans-serif;
 `
 
 const TopBarContainer = styled.div`
@@ -43,7 +63,8 @@ const TopBarContainer = styled.div`
     height: 20px;
     margin-left: 26px;
     margin-top: 10px
-
+    margin-bottom: 10px;
+    margin-top: 15px;
 `
 const TopMost = styled(TopBarContainer)`
     margin-bottom: 20px;
@@ -51,7 +72,7 @@ const TopMost = styled(TopBarContainer)`
 `
 
 const MonthAndDate = styled.div`
-    font-size: 18px;
+    font-size: 22px;
     color: rgb(72, 72, 72);
     font-weight: bold;
     font-family: Cabin, sans-serif;
@@ -69,7 +90,10 @@ const TaxFeeWarning = styled.div`
 const ClearDates = styled(TaxFeeWarning)`
   color: #008489
   margin-top: 0px;
+  :hover {
+    text-decoration: underline;
+  }
 `
 
 
-export {ClearDates, TaxFeeWarning, TopMost, CalendarContainer, DayContainer, DayContainer2, DaysTopBar, TopBarContainer, MonthAndDate}
+export { ClearDates, TaxFeeWarning, TopMost, CalendarContainer, DayContainer, DayContainer2, DaysTopBar, TopBarContainer, MonthAndDate}

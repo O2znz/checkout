@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FlexContainer from 'react-styled-flexbox';
 import {DayContainer, DayContainer2} from '../styling/CalendarStyles.js';
-import styled from 'styled-components';
 
 
 class Day extends Component {
