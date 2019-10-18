@@ -11,11 +11,14 @@ class Calendar extends Component {
         this.state = {
             datesArr: [],
             startDay: '',
-            startMonth: ''
+            startMonth: '',
+            endDay: '',
+            firstClick: true
         }
         this.generateDatesArr = this.generateDatesArr.bind(this);
         this.createResObj = this.createResObj.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleStartClick = this.handleStartClick.bind(this);
+        this.handleEndClick = this.handleEndClick.bind(this);
     }
 
     generateDatesArr(startDay, daysInMonth) {
@@ -48,11 +51,20 @@ class Calendar extends Component {
         return resObj
     }
 
-    handleClick(e, day, month) { 
-        this.setState({
-            startDay: day,
-            startMonth: month
-        })
+    handleStartClick(e, day, month) { 
+        if (!this.state.startDay) {
+            this.setState({
+                startDay: day,
+                startMonth: month,
+                firstClick: false
+            })
+        }
+    }
+
+    handleEndClick(e, day) {
+        if (this.state.startDay) {
+            this.setState({endDay: day})
+        } 
     }
 
 
@@ -62,15 +74,23 @@ class Calendar extends Component {
         var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
         var resObj = this.createResObj(this.props.reservedDates);
 
-        //console.log(this.props.monthStr, this.)
-
-        if (this.state.startDay && this.state.startMonth) {
+        if (this.state.startDay && this.state.startMonth === this.props.monthStr) {
             var grayedDates = 1;
             
-            while (grayedDates < this.state.startDay && this.state.startMonth === this.props.monthStr) {
+            while (grayedDates < this.state.startDay && this.state.startMonth) {
                     resObj[grayedDates] = true
                     grayedDates++;
             }
+        } 
+        
+        if (this.state.startDay && this.state.endDay) {
+            var grayedDates = this.state.endDay + 1
+
+            while (grayedDates <= 42) {
+                resObj[grayedDates] = true
+                grayedDates++;
+            }
+
         }
     
 
@@ -96,7 +116,11 @@ class Calendar extends Component {
                     <CalendarContainer> 
                         <Box display="flex" justifyContent="center" flexWrap="wrap"> 
                         {datesArr.map((day, index) => {
-                                return <Day month={this.props.monthStr} key={index} day={day} isReserved='false' reservedDates={resObj} handleClick={this.handleClick}/>
+                            if (this.state.firstClick) {
+                                return <Day month={this.props.monthStr} key={index} day={day} isReserved='false' reservedDates={resObj} handleClick={this.handleStartClick}/>
+                            } else if (!this.state.firstClick) {
+                                return <Day handleClick={this.handleEndClick} month={this.props.monthStr} key={index} day={day} isReserved='false' reservedDates={resObj}/>
+                            }
                         })}
                         </Box>
                     </CalendarContainer>

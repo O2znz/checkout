@@ -8,12 +8,10 @@ class Day extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            wasClicked: false,
+            wasClicked: false
         }
-        
     }
     
-   
 
     render() {
         const reservations = this.props.reservedDates;
@@ -27,7 +25,7 @@ class Day extends Component {
         } else if (reservations[day]) {
             box = <DayContainer2><FlexContainer justifyCenter={true} itemsCenter={true}>{this.props.day}</FlexContainer></DayContainer2>;
         } else if (!reservations[day]) {
-            box =  <DayContainer onClick={(e) => this.props.handleClick(e, day, month)}><FlexContainer justifyCenter={true} itemsCenter={true}> {this.props.day} </FlexContainer></DayContainer>;
+            box =  <DayContainer onClick={(e)=> this.props.handleClick(e, day, month)}><FlexContainer justifyCenter={true} itemsCenter={true}> {this.props.day} </FlexContainer></DayContainer>;
         } 
     
         return (box);          
@@ -36,11 +34,3 @@ class Day extends Component {
 
 export default Day;
 
-// <DayContainer onClick={() => this.props.handleClick(day)}
-// render() {
-//     //console.log(this.props.isReserved)
-//     return (
-//     <DayContainer><FlexContainer justifyCenter={true} itemsCenter={true}>{this.props.day}</FlexContainer></DayContainer>
-//     )
-// }
-// }
