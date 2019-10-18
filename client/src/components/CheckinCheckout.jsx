@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import Calendar from './Calendar.jsx'
-import styled from 'styled-components'
 import axios from 'axios';
+import FlexContainer from 'react-styled-flexbox';
+import {Checkin, Checkout, Arrow} from '../styling/CheckInCheckoutStyles.js'
 
-const Text = styled.span`
-    padding: 10px;
-    margin: 40px 0px 40px 10px;
-    font-size: 20px;
-`
 
 class CheckinCheckout extends Component {
   constructor(props) {
@@ -251,13 +247,16 @@ class CheckinCheckout extends Component {
 
 
   render() {
+    var checkin = 'Check-in'
+    var checkout = 'Checkout'
+    var arrow = '-->'
     return (
         <div>
-          <span>
-            <Text onClick={this.showCheckinCalendar}>Checkin</Text>
-            <Text> --> </Text>
-            <Text onClick={this.showCheckoutCalendar}>Checkout</Text>
-          </span>
+          <FlexContainer justifySpaceBetween={true}>
+              <Checkin onClick={this.showCheckinCalendar}>{checkin}</Checkin>
+              <Arrow> {arrow} </Arrow>
+              <Checkout onClick={this.showCheckoutCalendar}>{checkout}</Checkout>
+          </FlexContainer>
           {
           this.state.showCheckoutCalendar
             ? (

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {NextOrPreviousMonth, CalendarBox} from '../styling/reactStyles.js';
 import FlexContainer from 'react-styled-flexbox';
-import {CalendarContainer, DaysTopBar} from '../styling/CalendarStyles.js';
+import {ClearDates, CalendarContainer, DaysTopBar, TopBarContainer, MonthAndDate, TopMost, TaxFeeWarning} from '../styling/CalendarStyles.js';
 import Day from './Day.jsx';
-import Box from '@material-ui/core/Box'
+import Box from '@material-ui/core/Box';
+
 
 class Calendar extends Component {
     constructor(props) {
@@ -73,6 +74,9 @@ class Calendar extends Component {
         var nextArrow = '>';
         var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
         var resObj = this.createResObj(this.props.reservedDates);
+        var priceWarning = 'Prices do not include fees and taxes.'
+        var clearDates = 'Clear dates'
+        
 
         if (this.state.startDay && this.state.startMonth === this.props.monthStr) {
             var grayedDates = 1;
@@ -96,22 +100,26 @@ class Calendar extends Component {
 
         return (
             <CalendarBox>
-                <FlexContainer justifySpaceBetween={true}>
-                   <NextOrPreviousMonth onClick={this.props.getPreviousCalendar}>{previousArrow}</NextOrPreviousMonth>
-                   <div>{this.props.monthStr} {this.props.year}</div>
-                   <NextOrPreviousMonth onClick={this.props.getNextCalendar}>{nextArrow}</NextOrPreviousMonth>
-                </FlexContainer>
-                    <FlexContainer justifySpaceBetween={true}>
-                        <DaysTopBar>Su</DaysTopBar>
-                        <DaysTopBar>Mo</DaysTopBar>
-                        <DaysTopBar>Tu</DaysTopBar>
-                        <DaysTopBar>We</DaysTopBar>
-                        <DaysTopBar>Th</DaysTopBar>
-                        <DaysTopBar>Fr</DaysTopBar>
-                        <DaysTopBar>Sa</DaysTopBar>
+                <TopMost>
+                    <FlexContainer justifySpaceBetween={true} itemsCenter={true}>
+                        <FlexContainer>
+                        <NextOrPreviousMonth onClick={this.props.getPreviousCalendar}>{previousArrow}</NextOrPreviousMonth>
+                        </FlexContainer>
+                        <MonthAndDate>{this.props.monthStr} {this.props.year}</MonthAndDate>
+                        <NextOrPreviousMonth onClick={this.props.getNextCalendar}>{nextArrow}</NextOrPreviousMonth>
                     </FlexContainer>
-                <div>{this.props.currentMonth}</div>
-                <div>{this.props.month}</div>
+                </TopMost>
+                    <TopBarContainer>
+                        <FlexContainer justifySpaceBetween={true}>
+                            <DaysTopBar>Su</DaysTopBar>
+                            <DaysTopBar>Mo</DaysTopBar>
+                            <DaysTopBar>Tu</DaysTopBar>
+                            <DaysTopBar>We</DaysTopBar>
+                            <DaysTopBar>Th</DaysTopBar>
+                            <DaysTopBar>Fr</DaysTopBar>
+                            <DaysTopBar>Sa</DaysTopBar>
+                        </FlexContainer>
+                    </TopBarContainer>
                 <Box display="flex" justifyContent="center">
                     <CalendarContainer> 
                         <Box display="flex" justifyContent="center" flexWrap="wrap"> 
@@ -125,6 +133,14 @@ class Calendar extends Component {
                         </Box>
                     </CalendarContainer>
                 </Box>
+                <FlexContainer directionColumn={true}> 
+                        <TaxFeeWarning> 
+                            {priceWarning}
+                        </TaxFeeWarning>
+                        <ClearDates>
+                            {clearDates}
+                        </ClearDates>
+                </FlexContainer>
             </CalendarBox>
         )
     }

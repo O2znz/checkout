@@ -1,12 +1,16 @@
-import styled from 'styled-components';
 import React from 'react';
-import {NightlyRate, PerNight, GeneralText} from '../styling/reactStyles.js'
+import {NightlyRate, PerNight} from '../styling/PriceStyles.js'
 
 
 var Price = (props) => {
+    var perNight = 'per night'
+    var dollarSign = '$'
+
     return (
         <div className='price'>
-           <PerNight><NightlyRate>${props.price}</NightlyRate> per price</PerNight>
+           <PerNight>
+               <NightlyRate>{dollarSign}{props.price}</NightlyRate>{perNight}
+           </PerNight>
         </div>
     )
 }

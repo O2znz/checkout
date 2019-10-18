@@ -4,6 +4,7 @@ import {ReserveButton, Box, Line, GeneralText, DatesBox} from '../styling/reactS
 import Price from './Price.jsx';
 import Reviews from './Reviews.jsx';
 import CheckinCheckout from './CheckinCheckout.jsx';
+import {DatesAndGuests} from '../styling/AppStyles.js'
 
 
 
@@ -33,15 +34,19 @@ class App extends Component {
   }
 
   render() {
+    var dates = 'Dates';
+    var guests = 'Guests'
     return (
       <div>
             <Box> 
               <Price price={this.state.listingInfo.Price}/> 
               <Reviews rating={this.state.listingInfo.Rating} reviewsCount={this.state.listingInfo.ReviewCount}/>
               <Line/>
-              <GeneralText>Dates</GeneralText> 
-              <DatesBox><CheckinCheckout id={this.state.id}/></DatesBox>
-              <GeneralText>Guests</GeneralText> 
+              <DatesAndGuests>{dates}</DatesAndGuests> 
+               <DatesBox>
+                  <CheckinCheckout id={this.state.id}/>
+              </DatesBox>
+              <DatesAndGuests>{guests}</DatesAndGuests> 
               <DatesBox> 1 guest </DatesBox>
               <ReserveButton>Reserve</ReserveButton>
             </Box>
