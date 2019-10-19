@@ -11,22 +11,23 @@ createGlobalStyle`
   }
 `
 
-const PerNight = styled.span`
-  font-size: 12px;
-  color: #484848;
-  font-family: Cabin, sans-serif;
-  font-weight: 650
-`
-
-const NightlyRate = styled.span`
+const GuestCount = styled.span`
   font-size: 22px;
-  color: #484848;
-  padding-left: 10px;
+  color: rgb(72, 72, 72);
   font-family: Cabin, sans-serif;
-  font-weight: 650
-  margin-right: 4px
+  font-weight: 200;
+  margin-left: 18px;
 `
 
+const Dropdown = styled.div`
+    position: relative;
+    display: block;
+    z-index: 4;
+    margin-top: 20px;
+    border: 1px solid #EBEBEB;
+    width: 325px;
+    height: 100px;
+    background-color: pink;
+`
 
-
-export {NightlyRate, PerNight}
+export {GuestCount, Dropdown}

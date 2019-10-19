@@ -15,7 +15,13 @@ const DatesBox = styled.div`
   border: 1px solid #EBEBEB;
   height: 30px;
   padding: 10px;
-  margin: 5px
+  margin-top: 5px
+`
+const DatesBox2 = styled.div`
+  border: 1px solid blue;
+  height: 100px;
+  padding: 10px;
+  background: pink
 `
 
 const Box = styled.div`
@@ -73,5 +79,5 @@ const GeneralText = styled.div`
 
 
 
-export {TopRow, NextOrPreviousMonth, CalendarBox, NextButton, DatesBox, Line, Box}
+export {DatesBox2, TopRow, NextOrPreviousMonth, CalendarBox, NextButton, DatesBox, Line, Box}
 

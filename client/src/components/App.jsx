@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Box, DatesBox} from '../styling/reactStyles.js';
+import {Box, DatesBox, DatesBox2} from '../styling/reactStyles.js';
 import Price from './Price.jsx';
 import Reviews from './Reviews.jsx';
 import CheckinCheckout from './CheckinCheckout.jsx';
@@ -53,6 +53,7 @@ class App extends Component {
               </DatesBox>
               <DatesAndGuests>{guests}</DatesAndGuests> 
               <DatesBox> <Guests/> </DatesBox>
+              <DatesBox2> test </DatesBox2>
               <FlexContainer justifyCenter={true}>
                   <ReserveButton>Reserve</ReserveButton>
               </FlexContainer>
