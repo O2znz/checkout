@@ -19,15 +19,31 @@ const GuestCount = styled.span`
   margin-left: 18px;
 `
 
-const Dropdown = styled.div`
-    position: relative;
-    display: block;
-    z-index: 4;
-    margin-top: 20px;
-    border: 1px solid #EBEBEB;
-    width: 325px;
-    height: 100px;
-    background-color: pink;
+
+const InfantsBlurb = styled.div`
+    text-size: 15 px;
+    margin: 5px;
+    border: 1px solid blue;
+
+`
+const AgeBlock = styled.div`
+    height: 50px;
+    border: 1px solid blue;
+    margin: 5px;
+
 `
 
-export {GuestCount, Dropdown}
+const CloseButton = styled.div`
+    text-size: 15 px;
+    margin: 5px;
+    border: 1px solid blue;
+`
+
+const PlusButton = styled.button`
+    border-radius: 50%;
+    color: blue;
+    border-color: blue;
+    background-color: #fff
+`
+
+export {GuestCount, AgeBlock, CloseButton, InfantsBlurb, PlusButton}

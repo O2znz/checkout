@@ -19,9 +19,11 @@ const DatesBox = styled.div`
 `
 const DatesBox2 = styled.div`
   border: 1px solid blue;
-  height: 100px;
+  height: 300px;
   padding: 10px;
-  background: pink
+  background: #fff;
+  z-index: 3;
+  position: relative;
 `
 
 const Box = styled.div`

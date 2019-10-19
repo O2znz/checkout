@@ -37,6 +37,8 @@ const ReserveButton = styled.button`
   padding: 15px;
   font-size: 18px
   margin-top: 15px;
+  position: relative;
+  z-index: 1
 `
 
 const Line = styled.div`
