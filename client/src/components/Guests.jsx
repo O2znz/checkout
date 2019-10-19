@@ -14,21 +14,38 @@ class Guests extends Component {
             infants: 0,
             guestTotal: 1
         }
+        this.addAdults = this.addAdults.bind(this);
+        this.subtractAdults = this.subtractAdults.bind(this);
     }
 
     addAdults() {
-        if (this.state.guestTotal <= this.props.guestsMax) {
-            this.setState({adults: this.state.adults + 1})
+        if (this.state.guestTotal < this.props.guestsMax) {
+            this.setState({
+                adults: this.state.adults + 1,
+                guestTotal: this.state.guestTotal + 1
+            })
         }
     }
 
 
     subtractAdults() {
-        if (this.state.guestTotal >= 1) {
-            this.setState({adults: this.state.adults - 1})
+        if (this.state.guestTotal > 1) {
+            console.log(this.state.guestTotal, 'guest total should be greater than 1')
+            this.setState({
+                adults: this.state.adults - 1,
+                guestTotal: this.state.guestTotal - 1,
+            })
         }
     }
 
+    addChildren() {
+        if (this.state.guestTotal < this.props.guestsMax) {
+            this.setState({
+                adults: this.state.adults + 1,
+                guestTotal: this.state.guestTotal + 1
+            })
+        }
+    }
     
     
 
@@ -37,7 +54,7 @@ class Guests extends Component {
         var children = 'Children'
         var infants = 'Infants'
         var infantsBlurb = '4 guests maximum. Infants dont count towards the total number of guests.'
-        console.log(this.props.guestsMax, 'this is the max guestsfrom props')
+     
         return (
             <div>
                 <FlexContainer directionColumn={true}>
@@ -46,11 +63,11 @@ class Guests extends Component {
                             <FlexContainer justifySpaceBetween={true}>
                                 <span>{adults}</span>
                                 <FlexContainer>
-                                    <PlusButton>
+                                    <PlusButton onClick={this.addAdults}>
                                         +
                                     </PlusButton>
                                     {this.state.adults}
-                                    <PlusButton>
+                                    <PlusButton onClick={this.subtractAdults}>
                                         -
                                     </PlusButton>
                                 </FlexContainer>
