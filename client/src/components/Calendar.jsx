@@ -14,7 +14,9 @@ class Calendar extends Component {
             startDay: '',
             startMonth: '',
             endDay: '',
-            firstClick: true
+            firstClick: true,
+            nextReservedDay: '',
+            reservationObj: '',
         }
         this.generateDatesArr = this.generateDatesArr.bind(this);
         this.createResObj = this.createResObj.bind(this);
@@ -54,12 +56,56 @@ class Calendar extends Component {
 
     handleStartClick(e, day, month) { 
         if (!this.state.startDay) {
-            this.setState({
-                startDay: day,
-                startMonth: month,
-                firstClick: false
-            })
+    
+            var findNextReservedDay = (day, datesArr) => {
+                var counter = 0;
+                var result = 0;
+                var findDay = (day) => {
+                     if (datesArr.includes(day)) {
+                        result = day; 
+                        return;
+                     } else if (counter >= 42) {
+                         return;
+                     } else {
+                         counter++;
+                         return findDay(day+1)
+                     }
+                 }
+            findDay(day + 1);
+            return result;
+          }
+
+          var nextReservedDay = findNextReservedDay(day, this.props.reservedDates)
+
+          //make a copy of the reservation obj in state, then add greyed out dates
+          var resObjCopy = {...this.state.reservationObj}
+          var grayedDates = 1
+
+            while (grayedDates < day) {
+                    resObjCopy[grayedDates] = true;
+                    grayedDates++;
+            }   
+         
+
+          this.setState({
+            startDay: day,
+            startMonth: month,
+            firstClick: false,
+            nextReservedDay: nextReservedDay,
+            reservationObj: resObjCopy
+        })
+
         }
+
+
+        var resKeys = Object.keys(resObjCopy)
+        var resArray = [];
+
+        for (var i = 0; i < resKeys.length; i++) {
+            resArray.push(Number(resKeys[i]))
+        }
+
+        this.props.handleDateSelect(resArray, day)
     }
 
     handleEndClick(e, day) {
@@ -68,35 +114,20 @@ class Calendar extends Component {
         } 
     }
 
+    componentDidMount() {
+        var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
+        var resObj = this.createResObj(this.props.reservedDates);
+        this.setState({reservationObj: resObj})
+    }
+
+
 
     render() {
         var previousArrow = '<';
         var nextArrow = '>';
         var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
-        var resObj = this.createResObj(this.props.reservedDates);
         var priceWarning = 'Prices do not include fees and taxes.'
         var clearDates = 'Clear dates'
-        
-
-        if (this.state.startDay && this.state.startMonth === this.props.monthStr) {
-            var grayedDates = 1;
-            
-            while (grayedDates < this.state.startDay && this.state.startMonth) {
-                    resObj[grayedDates] = true
-                    grayedDates++;
-            }
-        } 
-        
-        if (this.state.startDay && this.state.endDay) {
-            var grayedDates = this.state.endDay + 1
-
-            while (grayedDates <= 42) {
-                resObj[grayedDates] = true
-                grayedDates++;
-            }
-
-        }
-    
 
         return (
             <CalendarBox>
@@ -125,9 +156,9 @@ class Calendar extends Component {
                         <Box display="flex" justifyContent="center" flexWrap="wrap"> 
                         {datesArr.map((day, index) => {
                             if (this.state.firstClick) {
-                                return <Day month={this.props.monthStr} key={index} day={day} isReserved='false' reservedDates={resObj} handleClick={this.handleStartClick}/>
+                                return <Day month={this.props.monthStr} key={index} day={day} isReserved='false' reservedDates={this.state.reservationObj} handleClick={this.handleStartClick}/>
                             } else if (!this.state.firstClick) {
-                                return <Day handleClick={this.handleEndClick} month={this.props.monthStr} key={index} day={day} isReserved='false' reservedDates={resObj}/>
+                                return <Day handleClick={this.handleEndClick} month={this.props.monthStr} key={index} day={day} isReserved='false' reservedDates={this.state.reservationObj}/>
                             }
                         })}
                         </Box>
