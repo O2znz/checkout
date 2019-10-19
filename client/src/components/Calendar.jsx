@@ -84,7 +84,12 @@ class Calendar extends Component {
             while (grayedDates < day) {
                     resObjCopy[grayedDates] = true;
                     grayedDates++;
-            }   
+            }
+            
+            while (nextReservedDay < 42) {
+                resObjCopy[nextReservedDay] = true;
+                nextReservedDay++
+            }
          
 
           this.setState({
@@ -96,7 +101,6 @@ class Calendar extends Component {
         })
 
         }
-
 
         var resKeys = Object.keys(resObjCopy)
         var resArray = [];
@@ -128,6 +132,8 @@ class Calendar extends Component {
         var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
         var priceWarning = 'Prices do not include fees and taxes.'
         var clearDates = 'Clear dates'
+
+
 
         return (
             <CalendarBox>
