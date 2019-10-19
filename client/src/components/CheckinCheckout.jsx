@@ -65,7 +65,8 @@ class CheckinCheckout extends Component {
       firstDayPreviousMonth: "",
       nextFirstDay: "",
       checkinCalendar: [],
-      checkinDate: 'Check-in'
+      checkinDate: 'Check-in',
+      checkoutDate: 'Checkout'
     }
     this.showCheckinCalendar = this.showCheckinCalendar.bind(this);
     this.showCheckoutCalendar = this.showCheckoutCalendar.bind(this);
@@ -73,6 +74,7 @@ class CheckinCheckout extends Component {
     this.getNextCalendar = this.getNextCalendar.bind(this);
     this.getPreviousCalendar = this.getPreviousCalendar.bind(this);
     this.handleDateSelect = this.handleDateSelect.bind(this);
+    this.handleCheckoutDateSelect = this.handleCheckoutDateSelect.bind(this);
   }
 
   getCurrentCalendar() {
@@ -257,6 +259,22 @@ class CheckinCheckout extends Component {
     })
   }
 
+  handleCheckoutDateSelect(day) {
+    /*
+    record the checkout date so i can set it to a variable
+    whatever
+    */
+
+   var month = this.state.month
+   var year = this.state.yearStr
+   var date = `${month}/${day}/${year}`
+
+    this.setState({
+      checkoutDate: date,
+      showCheckoutCalendar: false
+    })
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
       this.getCurrentCalendar()
@@ -268,20 +286,21 @@ class CheckinCheckout extends Component {
     var checkin = 'Check-in';
     var checkout = 'Checkout';
     var arrow = '-->';
+    
 
     return (
         <div>
           <FlexContainer justifySpaceBetween={true}>
               <Checkin onClick={this.showCheckinCalendar}>{this.state.checkinDate}</Checkin>
               <Arrow> {arrow} </Arrow>
-              <Checkout onClick={this.showCheckoutCalendar}>{checkout}</Checkout>
+              <Checkout onClick={this.showCheckoutCalendar}>{this.state.checkoutDate}</Checkout>
           </FlexContainer>
           {
           this.state.showCheckoutCalendar
             ? (
               <div>
                 <span>checkout</span>
-                <Calendar daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth}/>
+                <Calendar isCheckout='true' handleCheckoutSelect={this.handleCheckoutDateSelect} daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth}/>
               </div>
             )
             : (

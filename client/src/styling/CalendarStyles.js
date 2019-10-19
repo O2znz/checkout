@@ -22,18 +22,16 @@ const CalendarContainer = styled.div`
 const DayContainer = styled.span`
     width: 51px;
     height: 41px;
-    border: hidden;
     z-index: 4,
     position: relative;
     color: rgb(0, 132, 137);
-    padding-top: 13px;
+    padding-top: 15px;
     font-weight: 500;
     font-family: Cabin, sans-serif;
     :hover {
         border-radius: 50%;
-        width: 36px;
-        height: 36px;
-        padding: 8px;
+        width: 48px;
+        height: 38px;
         background: #fff;
         border: 2px solid #94CDEB;
       }
@@ -47,7 +45,7 @@ const DayContainer2 = styled.span`
     z-index: 4,
     position: relative;
     color: rgb(216, 216, 216);
-    padding-top: 13px;
+    padding-top: 15px;
     font-weight: 500;
     font-family: Cabin, sans-serif;
 `

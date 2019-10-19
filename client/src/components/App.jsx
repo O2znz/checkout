@@ -5,7 +5,8 @@ import Price from './Price.jsx';
 import Reviews from './Reviews.jsx';
 import CheckinCheckout from './CheckinCheckout.jsx';
 import {DatesAndGuests, ChargeWarning, ReserveButton, Line, Attention, Views} from '../styling/AppStyles.js'
-import FlexContainer from 'react-styled-flexbox'
+import FlexContainer from 'react-styled-flexbox';
+import Guests from './Guests.jsx'
 
 
 
@@ -51,7 +52,7 @@ class App extends Component {
                   <CheckinCheckout id={this.state.id}/>
               </DatesBox>
               <DatesAndGuests>{guests}</DatesAndGuests> 
-              <DatesBox> 1 guest </DatesBox>
+              <DatesBox> <Guests/> </DatesBox>
               <FlexContainer justifyCenter={true}>
                   <ReserveButton>Reserve</ReserveButton>
               </FlexContainer>

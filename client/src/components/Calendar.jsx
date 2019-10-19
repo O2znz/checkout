@@ -55,61 +55,67 @@ class Calendar extends Component {
     }
 
     handleStartClick(e, day, month) { 
-        if (!this.state.startDay) {
-    
-            var findNextReservedDay = (day, datesArr) => {
-                var counter = 0;
-                var result = 0;
-                var findDay = (day) => {
-                     if (datesArr.includes(day)) {
-                        result = day; 
-                        return;
-                     } else if (counter >= 42) {
-                         return;
-                     } else {
-                         counter++;
-                         return findDay(day+1)
-                     }
-                 }
-            findDay(day + 1);
-            return result;
-          }
+        if (this.props.handleDateSelect) {
+            if (!this.state.startDay) {
+        
+                var findNextReservedDay = (day, datesArr) => {
+                    var counter = 0;
+                    var result = 0;
+                    var findDay = (day) => {
+                        if (datesArr.includes(day)) {
+                            result = day; 
+                            return;
+                        } else if (counter >= 42) {
+                            return;
+                        } else {
+                            counter++;
+                            return findDay(day+1)
+                        }
+                    }
+                findDay(day + 1);
+                return result;
+            }
 
-          var nextReservedDay = findNextReservedDay(day, this.props.reservedDates)
+            var nextReservedDay = findNextReservedDay(day, this.props.reservedDates)
 
-          //make a copy of the reservation obj in state, then add greyed out dates
-          var resObjCopy = {...this.state.reservationObj}
-          var grayedDates = 1
+            //make a copy of the reservation obj in state, then add greyed out dates
+            var resObjCopy = {...this.state.reservationObj}
+            var grayedDates = 1
 
-            while (grayedDates < day) {
-                    resObjCopy[grayedDates] = true;
-                    grayedDates++;
+                while (grayedDates < day) {
+                        resObjCopy[grayedDates] = true;
+                        grayedDates++;
+                }
+                
+                while (nextReservedDay < 42) {
+                    resObjCopy[nextReservedDay] = true;
+                    nextReservedDay++
+                }
+            
+
+            this.setState({
+                startDay: day,
+                startMonth: month,
+                firstClick: false,
+                nextReservedDay: nextReservedDay,
+                reservationObj: resObjCopy
+            })
+
+            }
+
+            var resKeys = Object.keys(resObjCopy)
+            var resArray = [];
+
+            for (var i = 0; i < resKeys.length; i++) {
+                resArray.push(Number(resKeys[i]))
             }
             
-            while (nextReservedDay < 42) {
-                resObjCopy[nextReservedDay] = true;
-                nextReservedDay++
-            }
-         
-
-          this.setState({
-            startDay: day,
-            startMonth: month,
-            firstClick: false,
-            nextReservedDay: nextReservedDay,
-            reservationObj: resObjCopy
-        })
-
+            
+            this.props.handleDateSelect(resArray, day)
         }
-
-        var resKeys = Object.keys(resObjCopy)
-        var resArray = [];
-
-        for (var i = 0; i < resKeys.length; i++) {
-            resArray.push(Number(resKeys[i]))
+        else if (this.props.handleCheckoutSelect) {
+            this.props.handleCheckoutSelect(day)
         }
-
-        this.props.handleDateSelect(resArray, day)
     }
 
     handleEndClick(e, day) {
