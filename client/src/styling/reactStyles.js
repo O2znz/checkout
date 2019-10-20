@@ -16,6 +16,7 @@ const DatesBox = styled.div`
   height: 30px;
   padding: 10px;
   margin-top: 5px
+  border-radius: 3px
 `
 const DatesBox2 = styled.div`
   border: 1px solid #EBEBEB;
@@ -24,6 +25,7 @@ const DatesBox2 = styled.div`
   z-index: 3;
   position: relative;
   border-radius: 3px
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
 `
 
 const Box = styled.div`
@@ -32,6 +34,7 @@ const Box = styled.div`
   height: 500px;
   padding: 10px;
   background-color: #fff;
+  border-radius: 3px
 `
 
 const NextButton = styled.button`
@@ -63,6 +66,8 @@ const CalendarBox = styled.div`
   z-index: 2;
   position: relative;
   background-color: #fff;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px
 `
 
 

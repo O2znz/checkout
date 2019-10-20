@@ -8,7 +8,7 @@ import {DatesAndGuests, ChargeWarning, ReserveButton, Line, Attention, Views} fr
 import {GuestCount} from '../styling/GuestStyles.js'
 import FlexContainer from 'react-styled-flexbox';
 import Guests from './Guests.jsx'
-import { isThisExpression } from '@babel/types';
+import TotalCalculation from './TotalCalculation.jsx'
 
 
 class App extends Component {
@@ -20,7 +20,8 @@ class App extends Component {
       showGuests: false,
       hideBottom: false,
       guestCount: 1,
-      infantCount: 0
+      infantCount: 0,
+      hitClose: true
     };
     this.initialize = this.initialize.bind(this);
     this.changeGuestCount = this.changeGuestCount.bind(this);
@@ -89,7 +90,7 @@ class App extends Component {
                 <DatesBox2><Guests changeGuestCount={this.changeGuestCount} guestsMax={this.state.listingInfo.GuestsMax}/></DatesBox2>
                 : null
               }
-              {!this.state.hideBottom ? 
+              {!this.state.hideBottom && !this.state.hitClose ? 
                 (<span><FlexContainer justifyCenter={true}>
                 <ReserveButton>Reserve</ReserveButton>
                 </FlexContainer>
@@ -101,6 +102,23 @@ class App extends Component {
                   <Attention>{attention}</Attention>
                   <Views>{viewsThisWeek}</Views>
                 </FlexContainer>
+                </span>)
+                : null
+              }
+              {!this.state.hideBottom && this.state.hitClose ? 
+                (<span>
+                  <TotalCalculation></TotalCalculation>
+                  <FlexContainer justifyCenter={true}>
+                  <ReserveButton>Reserve</ReserveButton>
+                  </FlexContainer>
+                  <FlexContainer justifyCenter={true}>
+                    <ChargeWarning>{chargeWarning}</ChargeWarning>
+                  </FlexContainer>
+                  <Line/>
+                  <FlexContainer justifyLeft={true} directionColumn={true}>
+                    <Attention>{attention}</Attention>
+                    <Views>{viewsThisWeek}</Views>
+                  </FlexContainer>
                 </span>)
                 : null
               }
