@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Box, DatesBox, DatesBox2} from '../styling/reactStyles.js';
+import {Box, Box2, DatesBox, DatesBox2} from '../styling/reactStyles.js';
 import Price from './Price.jsx';
 import Reviews from './Reviews.jsx';
 import CheckinCheckout from './CheckinCheckout.jsx';

@@ -36,6 +36,9 @@ const Box = styled.div`
   background-color: #fff;
   border-radius: 3px
 `
+const Box2 = styled(Box)`
+  height: 700px;
+`
 
 const NextButton = styled.button`
   border: 1px solid #A8A6A6;
@@ -86,5 +89,5 @@ const GeneralText = styled.div`
 
 
 
-export {DatesBox2, TopRow, NextOrPreviousMonth, CalendarBox, NextButton, DatesBox, Line, Box}
+export {Box2, DatesBox2, TopRow, NextOrPreviousMonth, CalendarBox, NextButton, DatesBox, Line, Box}
 
