@@ -16,6 +16,8 @@ class Guests extends Component {
         }
         this.addAdults = this.addAdults.bind(this);
         this.subtractAdults = this.subtractAdults.bind(this);
+        this.addChildren = this.addChildren.bind(this);
+        this.subtractChildren = this.subtractChildren.bind(this);
     }
 
     addAdults() {
@@ -29,8 +31,7 @@ class Guests extends Component {
 
 
     subtractAdults() {
-        if (this.state.guestTotal > 1) {
-            console.log(this.state.guestTotal, 'guest total should be greater than 1')
+        if (this.state.guestTotal > 1 && this.state.adults > 1) {
             this.setState({
                 adults: this.state.adults - 1,
                 guestTotal: this.state.guestTotal - 1,
@@ -41,8 +42,17 @@ class Guests extends Component {
     addChildren() {
         if (this.state.guestTotal < this.props.guestsMax) {
             this.setState({
-                adults: this.state.adults + 1,
+                children: this.state.children + 1,
                 guestTotal: this.state.guestTotal + 1
+            })
+        }
+    }
+
+    subtractChildren() {
+        if (this.state.guestTotal > 1 && this.state.children > 0) {
+            this.setState({
+                children: this.state.children - 1,
+                guestTotal: this.state.guestTotal - 1,
             })
         }
     }
@@ -79,11 +89,11 @@ class Guests extends Component {
                             <FlexContainer justifySpaceBetween={true}>
                                 <span>{children}</span>
                                 <FlexContainer>
-                                    <PlusButton>
+                                    <PlusButton onClick={this.addChildren}>
                                         +
                                     </PlusButton>
                                     {this.state.children}
-                                    <PlusButton>
+                                    <PlusButton onClick={this.subtractChildren}>
                                         -
                                     </PlusButton>
                                 </FlexContainer>
