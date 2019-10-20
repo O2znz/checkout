@@ -33,7 +33,7 @@ const DayContainer = styled.span`
         width: 48px;
         height: 38px;
         background: #fff;
-        border: 2px solid #94CDEB;
+        border: 2px solid #99ede6;
       }
 `
 

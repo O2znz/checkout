@@ -18,12 +18,12 @@ const DatesBox = styled.div`
   margin-top: 5px
 `
 const DatesBox2 = styled.div`
-  border: 1px solid blue;
-  height: 300px;
-  padding: 10px;
+  border: 1px solid #EBEBEB;
+  height: 335px;
   background: #fff;
   z-index: 3;
   position: relative;
+  border-radius: 3px
 `
 
 const Box = styled.div`

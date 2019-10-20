@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FlexContainer from 'react-styled-flexbox';
-import {GuestCount, AgeBlock, CloseButton, InfantsBlurb, PlusButton} from '../styling/GuestStyles.js';
+import {SubSubOptions, SubOptions2, Numbers, AgeBlock, CloseButton, InfantsBlurb, PlusButton, MenuOptions, SubOptions} from '../styling/GuestStyles.js';
 
 
 
@@ -88,62 +88,82 @@ class Guests extends Component {
         var children = 'Children'
         var infants = 'Infants'
         var infantsBlurb = `${this.props.guestsMax} guests maximum. Infants dont count towards the total number of guests.`
-     
+        var underTwo = 'Under 2'
+        var ages = 'Ages 2-12'
+      
         return (
             <div>
                 <FlexContainer directionColumn={true}>
                     <AgeBlock>
-                        <GuestCount>
-                            <FlexContainer justifySpaceBetween={true}>
-                                <span>{adults}</span>
-                                <FlexContainer>
+                        <MenuOptions>
+                            <FlexContainer justifySpaceBetween={true} itemsFlexStart={true}>
+                                <FlexContainer directionColumn={true}>
+                                    <SubOptions2>{adults}</SubOptions2>
+                                 </FlexContainer>
+                                <FlexContainer itemsBaseline={true}>
                                     <PlusButton onClick={this.addAdults}>
                                         +
                                     </PlusButton>
-                                    {this.state.adults}
+                                        <Numbers>
+                                            {this.state.adults}
+                                        </Numbers>
                                     <PlusButton onClick={this.subtractAdults}>
                                         -
                                     </PlusButton>
                                 </FlexContainer>
                             </FlexContainer>
-                        </GuestCount>
+                        </MenuOptions>
                     </AgeBlock>
+                    <br/>
                     <AgeBlock>
-                        <GuestCount>
+                        <MenuOptions>
                             <FlexContainer justifySpaceBetween={true}>
-                                <span>{children}</span>
-                                <FlexContainer>
+                                <FlexContainer directionColumn={true}>
+                                    <SubOptions>{children}</SubOptions>
+                                    <SubSubOptions>{ages}</SubSubOptions>
+                                 </FlexContainer>
+                                <FlexContainer itemsBaseline={true}>
                                     <PlusButton onClick={this.addChildren}>
                                         +
                                     </PlusButton>
-                                    {this.state.children}
+                                        <Numbers>
+                                            {this.state.children}
+                                        </Numbers>
                                     <PlusButton onClick={this.subtractChildren}>
                                         -
                                     </PlusButton>
                                 </FlexContainer>
                             </FlexContainer>
-                        </GuestCount>
+                        </MenuOptions>
                     </AgeBlock>
+                    <br/>
                     <AgeBlock>
-                    <GuestCount>
+                    <MenuOptions>
                             <FlexContainer justifySpaceBetween={true}>
-                                <span>{infants}</span>
-                                <FlexContainer>
+                                <FlexContainer directionColumn={true}>
+                                <SubOptions>{infants}</SubOptions>
+                                <SubSubOptions>{underTwo}</SubSubOptions>
+                                </FlexContainer>
+                                <FlexContainer itemsBaseline={true}>
                                     <PlusButton onClick={this.addInfants}>
                                         +
                                     </PlusButton>
-                                    {this.state.infants}
+                                        <Numbers>
+                                            {this.state.infants}
+                                        </Numbers>
                                     <PlusButton onClick={this.subtractInfants}>
                                         -
                                     </PlusButton>
                                 </FlexContainer>
                             </FlexContainer>
-                        </GuestCount>
+                        </MenuOptions>
                     </AgeBlock>
                     <InfantsBlurb>{infantsBlurb}</InfantsBlurb>
-                    <CloseButton>
-                        Close
-                    </CloseButton>
+                    <FlexContainer justifyFlexEnd={true}>
+                        <CloseButton>
+                            Close
+                        </CloseButton>
+                    </FlexContainer>
                 </FlexContainer>
             </div>
         )
