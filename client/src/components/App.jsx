@@ -8,6 +8,7 @@ import {DatesAndGuests, ChargeWarning, ReserveButton, Line, Attention, Views} fr
 import {GuestCount} from '../styling/GuestStyles.js'
 import FlexContainer from 'react-styled-flexbox';
 import Guests from './Guests.jsx'
+import { isThisExpression } from '@babel/types';
 
 
 class App extends Component {
@@ -18,6 +19,8 @@ class App extends Component {
       id: '',
       showGuests: false,
       hideBottom: false,
+      guestCount: 1,
+      infantCount: 0
     };
     this.initialize = this.initialize.bind(this);
   }
@@ -43,7 +46,20 @@ class App extends Component {
     var chargeWarning = 'You wont be charged yet'
     var attention = 'This place is getting a lot of attention.'
     var viewsThisWeek = 'It’s been viewed 500+ times in the past week.'
-    var guestCount = '2 guests'
+    var guestCount;
+
+    if (this.state.guestCount === 1) {
+      guestCount = `${this.state.guestCount} guest`
+    } else if (this.state.guestCount > 1 && this.state.infantCount === 0) {
+      guestCount = `${this.state.guestCount} guests`
+    } else if (this.state.infantCount === 1 && this.state.guestCount === 1) {
+      guestCount = `${this.state.guestCount} guest, ${this.state.infantCount} infant`
+    } else if (this.state.infantCount === 1 && this.state.guestCount > 1) {
+      guestCount = `${this.state.guestCount} guest, ${this.state.infantCount} infants`
+    } else if (this.state.infantCount > 1 && this.state.guestCount > 1) {
+      guestCount = `${this.state.guestCount} guests, ${this.state.infantCount} infants`
+    }
+    
     return (
       <div>
             <Box> 

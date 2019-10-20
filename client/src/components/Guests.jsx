@@ -80,7 +80,7 @@ class Guests extends Component {
         var adults = 'Adults'
         var children = 'Children'
         var infants = 'Infants'
-        var infantsBlurb = '4 guests maximum. Infants dont count towards the total number of guests.'
+        var infantsBlurb = `${this.props.guestsMax} guests maximum. Infants dont count towards the total number of guests.`
      
         return (
             <div>
