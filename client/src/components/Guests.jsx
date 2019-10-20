@@ -28,6 +28,8 @@ class Guests extends Component {
                 adults: this.state.adults + 1,
                 guestTotal: this.state.guestTotal + 1
             })
+
+            this.props.changeGuestCount(this.state.guestTotal+1, this.state.infants)
         }
     }
 
@@ -38,6 +40,7 @@ class Guests extends Component {
                 adults: this.state.adults - 1,
                 guestTotal: this.state.guestTotal - 1,
             })
+            this.props.changeGuestCount(this.state.guestTotal-1, this.state.infants)
         }
     }
 
@@ -47,6 +50,7 @@ class Guests extends Component {
                 children: this.state.children + 1,
                 guestTotal: this.state.guestTotal + 1
             })
+            this.props.changeGuestCount(this.state.guestTotal+1, this.state.infants)
         }
     }
 
@@ -56,6 +60,7 @@ class Guests extends Component {
                 children: this.state.children - 1,
                 guestTotal: this.state.guestTotal - 1,
             })
+            this.props.changeGuestCount(this.state.guestTotal-1, this.state.infants)
         }
     }
     
@@ -64,6 +69,7 @@ class Guests extends Component {
             this.setState({
                 infants: this.state.infants + 1
             })
+            this.props.changeGuestCount(this.state.guestTotal, this.state.infants + 1)
         }
     }
 
@@ -73,6 +79,7 @@ class Guests extends Component {
             this.setState({
                 infants: this.state.infants - 1
             })
+            this.props.changeGuestCount(this.state.guestTotal, this.state.infants - 1)
         }
     }
 

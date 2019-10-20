@@ -23,6 +23,7 @@ class App extends Component {
       infantCount: 0
     };
     this.initialize = this.initialize.bind(this);
+    this.changeGuestCount = this.changeGuestCount.bind(this);
   }
 
   initialize() {
@@ -34,6 +35,13 @@ class App extends Component {
           id: response.data.listingId
         })
       });
+  }
+
+  changeGuestCount(guests, infants) {
+    this.setState({
+      infantCount: infants,
+      guestCount: guests
+    })
   }
 
   componentDidMount() {
@@ -48,16 +56,18 @@ class App extends Component {
     var viewsThisWeek = 'It’s been viewed 500+ times in the past week.'
     var guestCount;
 
-    if (this.state.guestCount === 1) {
+    if (this.state.guestCount === 1 && this.state.infantCount === 0) {
       guestCount = `${this.state.guestCount} guest`
     } else if (this.state.guestCount > 1 && this.state.infantCount === 0) {
       guestCount = `${this.state.guestCount} guests`
     } else if (this.state.infantCount === 1 && this.state.guestCount === 1) {
       guestCount = `${this.state.guestCount} guest, ${this.state.infantCount} infant`
     } else if (this.state.infantCount === 1 && this.state.guestCount > 1) {
-      guestCount = `${this.state.guestCount} guest, ${this.state.infantCount} infants`
+      guestCount = `${this.state.guestCount} guests, ${this.state.infantCount} infant`
     } else if (this.state.infantCount > 1 && this.state.guestCount > 1) {
       guestCount = `${this.state.guestCount} guests, ${this.state.infantCount} infants`
+    } else if (this.state.infantCount > 1 && this.state.guestCount === 1) {
+      guestCount = `${this.state.guestCount} guest, ${this.state.infantCount} infants`
     }
     
     return (
@@ -76,7 +86,7 @@ class App extends Component {
                       <GuestCount> {guestCount}</GuestCount>
                   </FlexContainer> </DatesBox>
               {this.state.showGuests ? 
-                <DatesBox2><Guests guestsMax={this.state.listingInfo.GuestsMax}/></DatesBox2>
+                <DatesBox2><Guests changeGuestCount={this.changeGuestCount} guestsMax={this.state.listingInfo.GuestsMax}/></DatesBox2>
                 : null
               }
               {!this.state.hideBottom ? 
