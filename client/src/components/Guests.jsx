@@ -18,6 +18,8 @@ class Guests extends Component {
         this.subtractAdults = this.subtractAdults.bind(this);
         this.addChildren = this.addChildren.bind(this);
         this.subtractChildren = this.subtractChildren.bind(this);
+        this.addInfants = this.addInfants.bind(this);
+        this.subtractInfants = this.subtractInfants.bind(this);
     }
 
     addAdults() {
@@ -57,7 +59,22 @@ class Guests extends Component {
         }
     }
     
-    
+    addInfants() {
+        if (this.state.infants  < 5) {
+            this.setState({
+                infants: this.state.infants + 1
+            })
+        }
+    }
+
+    subtractInfants() {
+        console.log('hitting here')
+        if (this.state.infants  > 0) {
+            this.setState({
+                infants: this.state.infants - 1
+            })
+        }
+    }
 
     render() {
         var adults = 'Adults'
@@ -105,11 +122,11 @@ class Guests extends Component {
                             <FlexContainer justifySpaceBetween={true}>
                                 <span>{infants}</span>
                                 <FlexContainer>
-                                    <PlusButton>
+                                    <PlusButton onClick={this.addInfants}>
                                         +
                                     </PlusButton>
                                     {this.state.infants}
-                                    <PlusButton>
+                                    <PlusButton onClick={this.subtractInfants}>
                                         -
                                     </PlusButton>
                                 </FlexContainer>

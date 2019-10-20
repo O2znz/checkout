@@ -9,22 +9,6 @@ import {GuestCount} from '../styling/GuestStyles.js'
 import FlexContainer from 'react-styled-flexbox';
 import Guests from './Guests.jsx'
 
-// const DatesBox2 = styled.div`
-//   border: 1px solid blue;
-//   height: 100px;
-//   padding: 10px;
-//   background: pink
-//   z-index: 6,
-//   position: relative;
-// `
-
-// var divStyle = {
-//   z-index: '4',
-//   backgroundImage: 'url(' + imgUrl + ')',
-//   WebkitTransition: 'all', // note the capital 'W' here
-//   msTransition: 'all' // 'ms' is the only lowercase vendor prefix
-// };
-
 
 class App extends Component {
   constructor(props) {
