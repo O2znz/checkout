@@ -21,10 +21,11 @@ class App extends Component {
       hideBottom: false,
       guestCount: 1,
       infantCount: 0,
-      hitClose: true
+      hitClose: false
     };
     this.initialize = this.initialize.bind(this);
     this.changeGuestCount = this.changeGuestCount.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
   }
 
   initialize() {
@@ -42,6 +43,13 @@ class App extends Component {
     this.setState({
       infantCount: infants,
       guestCount: guests
+    })
+  }
+
+  handleCloseClick() {
+    this.setState({
+      hitClose: true,
+      showGuests: false
     })
   }
 
@@ -87,7 +95,7 @@ class App extends Component {
                       <GuestCount> {guestCount}</GuestCount>
                   </FlexContainer> </DatesBox>
               {this.state.showGuests ? 
-                <DatesBox2><Guests changeGuestCount={this.changeGuestCount} guestsMax={this.state.listingInfo.GuestsMax}/></DatesBox2>
+                <DatesBox2><Guests handleCloseClick={this.handleCloseClick} changeGuestCount={this.changeGuestCount} guestsMax={this.state.listingInfo.GuestsMax}/></DatesBox2>
                 : null
               }
               {!this.state.hideBottom && !this.state.hitClose ? 
@@ -105,7 +113,7 @@ class App extends Component {
                 </span>)
                 : null
               }
-              {!this.state.hideBottom && this.state.hitClose ? 
+              {!this.state.showGuests && this.state.hitClose ? 
                 (<span>
                   <TotalCalculation cleaningFee={this.state.listingInfo.CleaningFee} price={this.state.listingInfo.Price}></TotalCalculation>
                   <FlexContainer justifyCenter={true}>

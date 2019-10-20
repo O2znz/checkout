@@ -30,9 +30,9 @@ const DatesBox2 = styled.div`
 
 const Box = styled.div`
   border: 1px solid #EBEBEB;
-  width: 400px;
+  width: 410px;
   height: 500px;
-  padding: 10px;
+  padding: 20px;
   background-color: #fff;
   border-radius: 3px
 `

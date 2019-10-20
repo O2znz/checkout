@@ -19,7 +19,7 @@ const Row = styled.div`
   font-weight: 200;
   color: #484848;
   font-family: 'Cabin', sans-serif;
-  margin-right: 6px;
+  margin-right: 7px;
   margin-top: 5px;
   margin-bottom: 5px;
 `

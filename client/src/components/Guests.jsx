@@ -160,7 +160,7 @@ class Guests extends Component {
                     </AgeBlock>
                     <InfantsBlurb>{infantsBlurb}</InfantsBlurb>
                     <FlexContainer justifyFlexEnd={true}>
-                        <CloseButton>
+                        <CloseButton onClick={this.props.handleCloseClick}>
                             Close
                         </CloseButton>
                     </FlexContainer>
