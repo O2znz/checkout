@@ -107,7 +107,7 @@ class App extends Component {
               }
               {!this.state.hideBottom && this.state.hitClose ? 
                 (<span>
-                  <TotalCalculation></TotalCalculation>
+                  <TotalCalculation cleaningFee={this.state.listingInfo.CleaningFee} price={this.state.listingInfo.Price}></TotalCalculation>
                   <FlexContainer justifyCenter={true}>
                   <ReserveButton>Reserve</ReserveButton>
                   </FlexContainer>
