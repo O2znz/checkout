@@ -44,6 +44,7 @@ class Calendar extends Component {
         }
 
         return results
+
     }
 
     createResObj (datesArray) {
@@ -55,9 +56,11 @@ class Calendar extends Component {
     }
 
     handleStartClick(e, day, month) { 
+
         if (this.props.handleDateSelect) {
+            
             if (!this.state.startDay) {
-        
+               
                 var findNextReservedDay = (day, datesArr) => {
                     var counter = 0;
                     var result = 0;
@@ -92,6 +95,7 @@ class Calendar extends Component {
                     nextReservedDay++
                 }
             
+            console.log('this is hitting')
 
             this.setState({
                 startDay: day,
@@ -99,7 +103,7 @@ class Calendar extends Component {
                 firstClick: false,
                 nextReservedDay: nextReservedDay,
                 reservationObj: resObjCopy
-            })
+            }, console.log('set state worked'))
 
             }
 
@@ -124,12 +128,19 @@ class Calendar extends Component {
         } 
     }
 
-    componentDidMount() {
-        var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
-        var resObj = this.createResObj(this.props.reservedDates);
-        this.setState({reservationObj: resObj})
-    }
+    // componentDidMount() {
+    //     var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
+    //     var resObj = this.createResObj(this.props.reservedDates);
+    //     this.setState({reservationObj: resObj})
+    // }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.reservedDates !== prevProps.reservedDates) {
+            var resObj = this.createResObj(this.props.reservedDates);
+           // console.log('this is the reservationobj from inside components did update', resObj)
+            this.setState({reservationObj: resObj})
+        }
+      }
 
 
     render() {
@@ -139,7 +150,7 @@ class Calendar extends Component {
         var priceWarning = 'Prices do not include fees and taxes.'
         var clearDates = 'Clear dates'
 
-
+        console.log(this.state.reservationObj, 'resobj in state')
 
         return (
             <CalendarBox>

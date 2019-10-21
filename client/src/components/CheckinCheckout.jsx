@@ -66,7 +66,8 @@ class CheckinCheckout extends Component {
       nextFirstDay: "",
       checkinCalendar: [],
       checkinDate: 'Check-in',
-      checkoutDate: 'Checkout'
+      checkoutDate: 'Checkout',
+      changedMonths: true
     }
     this.showCheckinCalendar = this.showCheckinCalendar.bind(this);
     this.showCheckoutCalendar = this.showCheckoutCalendar.bind(this);
@@ -245,11 +246,10 @@ class CheckinCheckout extends Component {
   }
 
   handleDateSelect(resArr, day) {
-
+    //changehere
     var month = this.state.month
     var year = this.state.yearStr
     var date = `${month}/${day}/${year}`
-
 
     this.setState({
       showCheckinCalendar: false,
