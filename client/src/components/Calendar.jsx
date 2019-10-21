@@ -4,6 +4,7 @@ import FlexContainer from 'react-styled-flexbox';
 import {ClearDates, CalendarContainer, DaysTopBar, TopBarContainer, MonthAndDate, TopMost, TaxFeeWarning} from '../styling/CalendarStyles.js';
 import Day from './Day.jsx';
 import Box from '@material-ui/core/Box';
+import { cloneNode } from '@babel/types';
 
 
 class Calendar extends Component {
@@ -17,11 +18,13 @@ class Calendar extends Component {
             firstClick: true,
             nextReservedDay: '',
             reservationObj: '',
+            beforeSelection: {}
         }
         this.generateDatesArr = this.generateDatesArr.bind(this);
         this.createResObj = this.createResObj.bind(this);
         this.handleStartClick = this.handleStartClick.bind(this);
         this.handleEndClick = this.handleEndClick.bind(this);
+        this.handleGrayOut = this.handleGrayOut.bind(this);
     }
 
     generateDatesArr(startDay, daysInMonth) {
@@ -81,7 +84,17 @@ class Calendar extends Component {
 
             var nextReservedDay = findNextReservedDay(day, this.props.reservedDates)
 
-            //make a copy of the reservation obj in state, then add greyed out dates
+                var resCopy =  {...this.state.reservationObj}
+                var count = day
+
+                if (count > 0 && count < 42) {
+                    count++
+                    resCopy[count] = true;
+                }
+
+                this.setState({resObj: resCopy})
+
+               
             var resObjCopy = {...this.state.reservationObj}
             var grayedDates = 1
 
@@ -95,7 +108,7 @@ class Calendar extends Component {
                     nextReservedDay++
                 }
             
-            console.log('this is hitting')
+            
 
             this.setState({
                 startDay: day,
@@ -103,7 +116,7 @@ class Calendar extends Component {
                 firstClick: false,
                 nextReservedDay: nextReservedDay,
                 reservationObj: resObjCopy
-            }, console.log('set state worked'))
+            })
 
             }
 
@@ -119,26 +132,49 @@ class Calendar extends Component {
         }
         else if (this.props.handleCheckoutSelect) {
             this.props.handleCheckoutSelect(day)
+            var resCopy2 = {...this.state.reservationObj}
+            this.handleGrayOut(resCopy2, day)
         }
     }
 
+    handleGrayOut(resObj, day) {
+        var resCopy =  {...resObj}
+        var count = day
+
+        if (count > 0 && count < 42) {
+            count++
+            resCopy[count] = true;
+        }
+
+        //console.log(resCopy, 'rescopy after while look in handle grayout')
+        // BUG: resCopy here is different then what reservationObj is after the state updates
+        this.setState({reservationObj: resCopy})
+        //this.setState({reservationObj: resCopy}, console.log('set state is happening in handle greyout, and this is the state of reservationObj', this.state.reservationObj))
+    }
+
     handleEndClick(e, day) {
+        //needs to update the reservation obj
+        //this function isnt
         if (this.state.startDay) {
-            this.setState({endDay: day})
+            this.setState({
+                endDay: day
+            })
         } 
     }
 
-    // componentDidMount() {
-    //     var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
-    //     var resObj = this.createResObj(this.props.reservedDates);
-    //     this.setState({reservationObj: resObj})
-    // }
+    componentDidMount() {
+        var datesArr = this.generateDatesArr(this.props.firstDay, this.props.daysInMonth)
+        var resObj = this.createResObj(this.props.reservedDates);
+        this.setState({
+            reservationObj: resObj})
+    }
 
     componentDidUpdate(prevProps) {
         if (this.props.reservedDates !== prevProps.reservedDates) {
             var resObj = this.createResObj(this.props.reservedDates);
-           // console.log('this is the reservationobj from inside components did update', resObj)
-            this.setState({reservationObj: resObj})
+            this.setState({
+                reservationObj: resObj
+            })
         }
       }
 
@@ -191,7 +227,7 @@ class Calendar extends Component {
                         <TaxFeeWarning> 
                             {priceWarning}
                         </TaxFeeWarning>
-                        <ClearDates>
+                        <ClearDates onClick={this.props.clearDates}>
                             {clearDates}
                         </ClearDates>
                 </FlexContainer>

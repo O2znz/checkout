@@ -67,7 +67,8 @@ class CheckinCheckout extends Component {
       checkinCalendar: [],
       checkinDate: 'Check-in',
       checkoutDate: 'Checkout',
-      changedMonths: true
+      changedMonths: true,
+      initialDates: []
     }
     this.showCheckinCalendar = this.showCheckinCalendar.bind(this);
     this.showCheckoutCalendar = this.showCheckoutCalendar.bind(this);
@@ -76,13 +77,17 @@ class CheckinCheckout extends Component {
     this.getPreviousCalendar = this.getPreviousCalendar.bind(this);
     this.handleDateSelect = this.handleDateSelect.bind(this);
     this.handleCheckoutDateSelect = this.handleCheckoutDateSelect.bind(this);
+    this.clearDates = this.clearDates.bind(this)
   }
 
   getCurrentCalendar() {
     axios.get(`/currentCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
-        this.setState({reservedDates: response.data.reservedDates})
+        this.setState({
+          reservedDates: response.data.reservedDates,
+          initialDates: response.data.reservedDates
+        })
       })
       .catch((err) => {
         console.log("there was an err getting the current calendar: ", err)
@@ -121,6 +126,7 @@ class CheckinCheckout extends Component {
     var previousReserved = this.state.reservedDates
     this.setState({
       reservedDates: currentReservedDates,
+      initialDates: currentReservedDates,
       previousMonthReservedDates: previousReserved
     })
     // then fetch the next month's reserved dates and change state accordingly
@@ -169,7 +175,10 @@ class CheckinCheckout extends Component {
 
   getPreviousCalendar() {
     var currentReservedDates = this.state.previousMonthReservedDates
-    this.setState({reservedDates: currentReservedDates})
+    this.setState({
+      reservedDates: currentReservedDates,
+      initialDates: currentReservedDates
+    })
 
     axios.get(`/previousCalendar?ID=${this.props.id}`)
       .then((response) => {
@@ -246,7 +255,9 @@ class CheckinCheckout extends Component {
   }
 
   handleDateSelect(resArr, day) {
+    console.log('this is resarr in handledateselect', resArr)
     //changehere
+    //handle date select isnt called for when i select the second date, it probably would help with the gray out 
     var month = this.state.month
     var year = this.state.yearStr
     var date = `${month}/${day}/${year}`
@@ -259,11 +270,11 @@ class CheckinCheckout extends Component {
     })
   }
 
+  clearDates() {
+    this.setState({reservedDates: this.state.initialDates})
+  }
+
   handleCheckoutDateSelect(day) {
-    /*
-    record the checkout date so i can set it to a variable
-    whatever
-    */
 
    var month = this.state.month
    var year = this.state.yearStr
@@ -280,6 +291,7 @@ class CheckinCheckout extends Component {
       this.getCurrentCalendar()
     }
   }
+
 
 
   render() {
@@ -300,7 +312,7 @@ class CheckinCheckout extends Component {
             ? (
               <div>
                 <span>checkout</span>
-                <Calendar isCheckout='true' handleCheckoutSelect={this.handleCheckoutDateSelect} daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth}/>
+                <Calendar clearDates={this.clearDates} isCheckout='true' handleCheckoutSelect={this.handleCheckoutDateSelect} daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth}/>
               </div>
             )
             : (
@@ -312,7 +324,7 @@ class CheckinCheckout extends Component {
             ? (
               <div>
                 <span>checkin</span> 
-                <Calendar handleDateSelect={this.handleDateSelect} daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={132}/>
+                <Calendar clearDates={this.clearDates} handleDateSelect={this.handleDateSelect} daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth}/>
               </div>
             )
             : (
