@@ -3,15 +3,11 @@ import Calendar from './Calendar.jsx'
 import styled from 'styled-components'
 import axios from 'axios';
 
-
-
-
 const Text = styled.span`
     padding: 10px;
     margin: 40px 0px 40px 10px;
     font-size: 20px;
 `
-
 
 class CheckinCheckout extends Component {
   constructor(props) {
@@ -70,7 +66,7 @@ class CheckinCheckout extends Component {
       nextMonthReservedDates: [],
       previousMonthReservedDates: 'All the days are passed.',
       firstDayOfMonth: "",
-      previousFirstDay: "",
+      firstDayPreviousMonth: "",
       nextFirstDay: "",
     }
     this.showCheckinCalendar = this.showCheckinCalendar.bind(this);
@@ -136,19 +132,11 @@ class CheckinCheckout extends Component {
       });
       //change the monthStr state and the year
 
-     //current month like 'december
+  
      var currentMonth = this.state.monthStr;
-      // number representing the first day of the month like 0 for sunday
      var firstDayofCurrentMonth = this.state.firstDayOfMonth
-     //number of days in the month
      var numberOfDaysInMonth = this.state.daysInMonth[currentMonth]
-     console.log("this is the current month", currentMonth)
-     console.log("this is the first day of the current month", firstDayofCurrentMonth)
-     console.log('this is the current numberOfDays in the month', numberOfDaysInMonth)
-     //console.log(" this is the current first day, plus the number of days in the month, modulo 7", firstDayofCurrentMonth + )
-     
      var newFirstDay = (firstDayofCurrentMonth + numberOfDaysInMonth) % 7
-     console.log('this is the new first day', newFirstDay)
      
 
      var nextMonthStr = this.state.months[currentMonth];
@@ -159,7 +147,8 @@ class CheckinCheckout extends Component {
 
      this.setState({
        firstDayOfMonth: newFirstDay,
-       nextFirstDay: nextMonthNewFirstDay
+       nextFirstDay: nextMonthNewFirstDay,
+       firstDayPreviousMonth: firstDayofCurrentMonth
      })
     
 
@@ -200,7 +189,27 @@ class CheckinCheckout extends Component {
           monthStr: monStr
           })
       }
-  }
+
+        // Calculate the day of the week the first day of this month, last month and next month fall upon
+      var previousMonth = this.state.monthBack[this.state.monthStr];
+      var daysInPreviousMonth = this.state.daysInMonth[previousMonth];
+      var firstDayOfPreviousMonth = (daysInPreviousMonth - this.state.firstDayOfMonth)%7;
+      var newCurrentMonth = this.state.firstDayPreviousMonth
+      var newNextMonth = this.state.firstDayOfMonth
+
+      if (this.state.monthStr === 'January') {
+        firstDayOfPreviousMonth = 5;
+        newCurrentMonth = 0
+        newNextMonth = 3;
+      }
+
+
+      this.setState({
+        firstDayPreviousMonth: firstDayOfPreviousMonth,
+        firstDayOfMonth: newCurrentMonth,
+        nextFirstDay:  newNextMonth
+      })
+    }
 
   showCheckoutCalendar(event) {
     event.preventDefault();
@@ -253,7 +262,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckoutCalendar
             ? (
               <div>
-                <Calendar firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={99}/>
+                <Calendar daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth}/>
               </div>
             )
             : (
@@ -264,7 +273,7 @@ class CheckinCheckout extends Component {
           this.state.showCheckinCalendar 
             ? (
               <div>
-                <Calendar getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={132}/>
+                <Calendar daysInMonth={this.state.daysInMonth[this.state.monthStr]} firstDay={this.state.firstDayOfMonth} getPreviousCalendar={this.getPreviousCalendar} getNextCalendar={this.getNextCalendar} monthStr={this.state.monthStr} year={this.state.yearStr} reservedDates={this.state.reservedDates} currentMonth={this.state.currentMonth} month={132}/>
               </div>
             )
             : (

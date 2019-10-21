@@ -68,19 +68,12 @@ app.get('/currentCalendar', (req, res) => {
 
 app.get('/monthAndYear', (req, res) => {
   var month = req.query.ID
-  console.log("this is month on the server side", month)
   var year = '20' + strYear 
-  console.log(currentMonth, "this is the current month!!")
   var months = ['x', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var month = months[currentMonth];
   res.send({year, month})
 })
 
-
-// var date = moment("12 1 2018");
-// var daysinMont = date.daysInMonth()
-// var dow = date.day();
-// console.log(dow);
 
 app.get('/month', (req, res) =>{
   var today = new Date();
@@ -166,21 +159,6 @@ app.get('/previousCalendar', (req, res) => {
   }
 })
 
-app.get('/firstDay2019', (req, res) => {
-  var month = Number(req.query.ID);
-  var date = `${month} 1 2019`
-  var dow = date.day()
-  res.send(dow)
-
-  // var date = moment("October 1 2019");
-// var daysinMont = date.daysInMonth()
-// var dow = date.day();
-// console.log(daysinMont);
-/*
-I need the number of days in a month, and the day of the week of the first day in the month 
-
-*/
-})
 
 
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));
