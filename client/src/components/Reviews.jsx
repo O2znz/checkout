@@ -1,5 +1,5 @@
 import React from 'react';
-import {RatingStyle, ReviewStyle} from '../styling/reactStyles.js';
+import {RatingStyle, ReviewStyle} from '../styling/ReviewsStyles';
 import Star from 'react-star-rating-component';
 
 var Reviews = (props) => {

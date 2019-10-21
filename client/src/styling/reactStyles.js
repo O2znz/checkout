@@ -1,11 +1,43 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
+createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css?family=Cabin|Rubik&display=swap');
+  
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Cabin', sans-serif;
+  }
+`
+
+const DatesBox = styled.div`
+  border: 1px solid #EBEBEB;
+  height: 30px;
+  padding: 10px;
+  margin-top: 5px
+  border-radius: 3px
+`
+const DatesBox2 = styled.div`
+  border: 1px solid #EBEBEB;
+  height: 335px;
+  background: #fff;
+  z-index: 3;
+  position: relative;
+  border-radius: 3px
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
+`
 
 const Box = styled.div`
-  border: 2px solid gray;
-  width: 400px;
+  border: 1px solid #EBEBEB;
+  width: 410px;
   height: 500px;
-  padding: 10px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 3px
+`
+const Box2 = styled(Box)`
+  height: 700px;
 `
 
 const NextButton = styled.button`
@@ -15,14 +47,14 @@ const NextButton = styled.button`
   margin: 20px;
 `
 
-const NextOrPreviousMonth = styled.span`
-  border: 1px solid gray;
-  width: 10px;
-  height: 7px;
-  padding: 10px;
+const NextOrPreviousMonth = styled.span` 
   z-index: 3;
   position: relative;
-  background-color: #FAFAFA;
+  background-color: #FFF;
+  font-weight: 400;
+  color: #484848;
+  font-size: 22px;
+  font-family: Cabin, sans-serif;
 `
 const TopRow = styled.div`
   display: flex;
@@ -30,39 +62,20 @@ const TopRow = styled.div`
 `
 
 const CalendarBox = styled.div`
-  border: 2px solid gray;
+  border: 1px solid #EBEBEB;
   width: 400px;
   height: 500px;
   padding: 10px;
   z-index: 2;
   position: relative;
-  background-color: #FAFAFA;
-`
-const NightlyRate = styled.span`
-  font-size: 20px;
-  color: #312B2B;
-  padding-left: 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px
 `
 
-const PerNight = styled.span`
-  font-size: 14px;
-  color: #312B2B;
-`
-
-const RatingStyle = styled.span`
-  font-size: 14px;
-  color: #312B2B;
-  font-weight: bold;
-  padding-left: 10px;
-`
-
-const ReviewStyle = styled.span`
-  font-size: 14px;
-  color: #979696;
-`
 
 const Line = styled.div`
-  color:#BAB9B9;
+  color: #EBEBEB;
   border-top: 1px solid;
   margin: 10px;
 `
@@ -73,32 +86,8 @@ const GeneralText = styled.div`
   margin-top: 30px
 `
 
-const DatesBox = styled.div`
-  border: 1px solid gray;
-  width: 230 px;
-  height: 30px;
-  padding: 10px;
-  margin:10px
-`
-
-const ReserveButton = styled.button`
-  background: red;
-  color: white;
-  text-align: center;
-  border-radius: 4px;
-  width: 380px;
-  padding: 20px;
-  margin: 10px;
-  font-size: 16px
-  z-index: 1;
-  position: relative;
-`
 
 
 
- 
-
-
-
-export {TopRow, NextOrPreviousMonth, CalendarBox, NextButton, ReserveButton, DatesBox, GeneralText, Line, Box, NightlyRate, PerNight, RatingStyle, ReviewStyle}
+export {Box2, DatesBox2, TopRow, NextOrPreviousMonth, CalendarBox, NextButton, DatesBox, Line, Box}
 
