@@ -1,7 +1,6 @@
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components'
 
-createGlobalStyle`
+
+window.styled.createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Rubik&display=swap');
   
   body {
@@ -11,25 +10,25 @@ createGlobalStyle`
   }
 `
 
-const Text = styled.span`
+const Text = window.styled.span`
     font-size: 22px;
 `
 
-const Checkin = styled(Text)`
+const Checkin = window.styled(Text)`
     margin-left: 16px;
     color: rgb(118, 118, 118);
     font-family: Cabin, sans-serif;
     font-weight: 200;
 `
 
-const Checkout = styled(Text)`
+const Checkout = window.styled(Text)`
     margin-right: 16px;
     color: rgb(118, 118, 118);
     font-family: Cabin, sans-serif;
     font-weight: 200;
 `
 
-const Arrow = styled(Text)`
+const Arrow = window.styled(Text)`
     color: rgb(72, 72, 72);  
 `
 

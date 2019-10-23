@@ -1,7 +1,4 @@
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components'
-
-createGlobalStyle`
+window.styled.createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Rubik&display=swap');
   
   body {
@@ -11,7 +8,7 @@ createGlobalStyle`
   }
 `
 
-const RatingStyle = styled.span`
+const RatingStyle = window.styled.span`
   font-size: 12px;
   color: rgb(72, 72, 72);
   font-weight: 400;
@@ -19,7 +16,7 @@ const RatingStyle = styled.span`
   font-family: Cabin, sans-serif;
 `
 
-const ReviewStyle = styled.span`
+const ReviewStyle = window.styled.span`
   font-size: 12px;
   color: #767676;
   font-family: Cabin, sans-serif;

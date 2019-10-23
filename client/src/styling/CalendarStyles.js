@@ -1,7 +1,6 @@
-import styled from 'styled-components'
-import { createGlobalStyle } from 'styled-components'
 
-createGlobalStyle`
+
+window.styled.createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Rubik&display=swap');
   
   body {
@@ -11,7 +10,7 @@ createGlobalStyle`
   }
 `
 
-const CalendarContainer = styled.div`
+const CalendarContainer = window.styled.div`
     width: 375px;
     height: 300px;
     border: hidden;
@@ -19,7 +18,7 @@ const CalendarContainer = styled.div`
     position: relative;
 `
 
-const DayContainer = styled.span`
+const DayContainer = window.styled.span`
     width: 51px;
     height: 41px;
     z-index: 4,
@@ -38,7 +37,7 @@ const DayContainer = styled.span`
 `
 
 
-const DayContainer2 = styled.span`
+const DayContainer2 = window.styled.span`
     width: 51px;
     height: 41px;
     border: hidden;
@@ -50,13 +49,13 @@ const DayContainer2 = styled.span`
     font-family: Cabin, sans-serif;
 `
 
-const DaysTopBar = styled.span`
+const DaysTopBar = window.styled.span`
     font-weight: bold;
     color: rgb(117, 117, 117);
     font-family: Cabin, sans-serif;
 `
 
-const TopBarContainer = styled.div`
+const TopBarContainer = window.styled.div`
     width: 350px;
     height: 20px;
     margin-left: 26px;
@@ -64,18 +63,18 @@ const TopBarContainer = styled.div`
     margin-bottom: 10px;
     margin-top: 15px;
 `
-const TopMost = styled(TopBarContainer)`
+const TopMost = window.styled(TopBarContainer)`
     margin-bottom: 20px;
     margin-top: 15px;
 `
 
-const MonthAndDate = styled.div`
+const MonthAndDate = window.styled.div`
     font-size: 22px;
     color: rgb(72, 72, 72);
     font-weight: bold;
     font-family: Cabin, sans-serif;
 `
-const TaxFeeWarning = styled.div`
+const TaxFeeWarning = window.styled.div`
     font-family: Cabin, sans-serif;
     color: rgb(118, 118, 118);
     width: 375px;
@@ -85,7 +84,7 @@ const TaxFeeWarning = styled.div`
     margin-left: 12px;
 `
 
-const ClearDates = styled(TaxFeeWarning)`
+const ClearDates = window.styled(TaxFeeWarning)`
   color: #008489
   margin-top: 0px;
   :hover {

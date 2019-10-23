@@ -1,7 +1,6 @@
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components'
 
-createGlobalStyle`
+
+window.styled.createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Rubik&display=swap');
   
   body {
@@ -11,7 +10,7 @@ createGlobalStyle`
   }
 `
 
-const DatesAndGuests = styled.span`
+const DatesAndGuests = window.styled.span`
     margin-left: 5px;
     font-family: Cabin, sans-serif;
     color: #484848;
@@ -19,7 +18,7 @@ const DatesAndGuests = styled.span`
     font-weight: 600;
 `
 
-const ChargeWarning = styled.div`
+const ChargeWarning = window.styled.div`
     margin-top: 5px;
     margin-bottom: 20px;
     font-family: Cabin, sans-serif;
@@ -28,7 +27,7 @@ const ChargeWarning = styled.div`
     font-weight: 600;
 `
 
-const ReserveButton = styled.button`
+const ReserveButton = window.styled.button`
   background: rgb(255, 90, 95);
   color: #ffffff;
   text-align: center;
@@ -41,13 +40,13 @@ const ReserveButton = styled.button`
   z-index: 1
 `
 
-const Line = styled.div`
+const Line = window.styled.div`
   color: #EBEBEB;
   border-top: 1px solid;
   width: 385px;
   margin: 10px;
 `
-const Attention = styled.div`
+const Attention = window.styled.div`
   font-family: Cabin, sans-serif;
   color: #484848;
   font-weight: 800;
@@ -55,7 +54,7 @@ const Attention = styled.div`
   margin-left: 10px;
 `
 
-const Views = styled.div`
+const Views = window.styled.div`
   font-family: Cabin, sans-serif;
   color: #484848;
   font-weight: 400;

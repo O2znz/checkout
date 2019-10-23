@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   initialize() {
-    axios.get('/listing')
+    axios.get('http://localhost:3002/listing')
       .then((response) => {
         console.log(response.data)
         this.setState({
