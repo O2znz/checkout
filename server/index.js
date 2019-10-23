@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const PORT = 3001;
+const PORT = 3002;
 const getFns = require('./controllers/getRequests.js');
 const faker = require('faker');
 const bodyparser = require('body-parser');
@@ -10,9 +10,13 @@ var monthTracker;
 var yearTracker;
 var currentMonth;
 var currentDay;
-var currentDate;
 var currentYear = 19;
 var daysPastThisMonth;
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 
 app.use(express.static(path.join(__dirname, '../client/dist')));

@@ -1,7 +1,4 @@
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components'
-
-createGlobalStyle`
+window.styled.createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Rubik&display=swap');
   
   body {
@@ -11,14 +8,14 @@ createGlobalStyle`
   }
 `
 
-const PerNight = styled.span`
+const PerNight = window.styled.span`
   font-size: 12px;
   color: #484848;
   font-family: Cabin, sans-serif;
   font-weight: 650
 `
 
-const NightlyRate = styled.span`
+const NightlyRate = window.styled.span`
   font-size: 22px;
   color: #484848;
   padding-left: 10px;

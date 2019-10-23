@@ -81,7 +81,7 @@ class CheckinCheckout extends Component {
   }
 
   getCurrentCalendar() {
-    axios.get(`/currentCalendar?ID=${this.props.id}`)
+    axios.get(`http://localhost:3002/currentCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({
@@ -93,7 +93,7 @@ class CheckinCheckout extends Component {
         console.log("there was an err getting the current calendar: ", err)
       });
 
-      axios.get('/month')
+      axios.get('http://localhost:3002/month')
         .then((response) => {
           var month = Number(response.data.month)
           var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -110,7 +110,7 @@ class CheckinCheckout extends Component {
         })
       })
 
-      axios.get(`/nextCalendar?ID=${this.props.id}`)
+      axios.get(`http://localhost:3002/nextCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({nextMonthReservedDates: response.data.reservedDates})
@@ -130,7 +130,7 @@ class CheckinCheckout extends Component {
       previousMonthReservedDates: previousReserved
     })
     // then fetch the next month's reserved dates and change state accordingly
-    axios.get(`/nextCalendar?ID=${this.props.id}`)
+    axios.get(`http://localhost:3002/nextCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({nextMonthReservedDates: response.data.reservedDates})
@@ -180,7 +180,7 @@ class CheckinCheckout extends Component {
       initialDates: currentReservedDates
     })
 
-    axios.get(`/previousCalendar?ID=${this.props.id}`)
+    axios.get(`http://localhost:3002/previousCalendar?ID=${this.props.id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({previousMonthReservedDates: response.data.reservedDates})

@@ -1,7 +1,6 @@
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components'
 
-createGlobalStyle`
+
+window.styled.createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Cabin|Rubik&display=swap');
   
   body {
@@ -11,7 +10,7 @@ createGlobalStyle`
   }
 `
 
-const GuestCount = styled.span`
+const GuestCount = window.styled.span`
   font-size: 22px;
   color: rgb(72, 72, 72);
   font-family: Cabin, sans-serif;
@@ -20,7 +19,7 @@ const GuestCount = styled.span`
 `
 
 
-const MenuOptions = styled.span`
+const MenuOptions = window.styled.span`
   font-size: 19px;
   color: rgb(72, 72, 72);
   font-family: Cabin, sans-serif;
@@ -28,7 +27,7 @@ const MenuOptions = styled.span`
   margin-left: 18px;
 `
 
-const SubOptions = styled.span`
+const SubOptions = window.styled.span`
     font-size: 21px;
     color: rgb(72, 72, 72);
     font-family: Cabin, sans-serif;
@@ -37,12 +36,12 @@ const SubOptions = styled.span`
     padding-top: 5px;
 `
 
-const SubSubOptions = styled(SubOptions)`
+const SubSubOptions = window.styled(SubOptions)`
     font-size: 18px;
     font-weight: 200;
     padding-bottom: 15px
 `
-const SubOptions2 = styled(SubOptions)`
+const SubOptions2 = window.styled(SubOptions)`
     font-size: 21px;
     color: rgb(72,72,72);
     font-family: Cabin,sans-serif;
@@ -52,7 +51,7 @@ const SubOptions2 = styled(SubOptions)`
 `
 
 
-const InfantsBlurb = styled.div`
+const InfantsBlurb = window.styled.div`
     margin-top: 60px;
     margin-left: 18px;
     font-family: Cabin, sans-serif;
@@ -60,12 +59,12 @@ const InfantsBlurb = styled.div`
     font-size: 18px;
     font-weight: 200;
 `
-const AgeBlock = styled.div`
+const AgeBlock = window.styled.div`
     height: 50px;
     margin-right: 15px;
 `
 
-const CloseButton = styled.div`
+const CloseButton = window.styled.div`
     margin-right: 15px;
     margin-top: 10px;
     color: #008489;
@@ -76,7 +75,7 @@ const CloseButton = styled.div`
     }
 `
 
-const PlusButton = styled.button`
+const PlusButton = window.styled.button`
     border-radius: 50%;
     color: #008489;
     border-color: #008489;
@@ -88,7 +87,7 @@ const PlusButton = styled.button`
     font-weight: 100;
 `
 
-const Numbers = styled.span`
+const Numbers = window.styled.span`
   font-size: 21px;
   margin: 0px 8px 0px 8px;
 `
