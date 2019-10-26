@@ -44,8 +44,7 @@
     "react-measure": "^2.3.0",
     "react-star-rating-component": "^1.4.1",
     "react-styled-flexbox": "^2.0.0",
-    "semantic-ui-react": "^0.88.1",
-    "styled-components": "^4.4.0"
+    "semantic-ui-react": "^0.88.1"
   },
   "babel": {
     "presets": [
